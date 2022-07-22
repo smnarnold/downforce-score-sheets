@@ -1,0 +1,179 @@
+{
+  "initial": {
+    "slideIndex": 0,
+    "autionObj": {},
+    "betsArr": [],
+    "finishPosArr": []
+  },
+  "cars": [
+    {
+      "id": "black",
+      "name": "Black"
+    },
+    {
+      "id": "blue",
+      "name": "Blue"
+    },
+    {
+      "id": "green",
+      "name": "Green"
+    },
+    {
+      "id": "orange",
+      "name": "Orange"
+    },
+    {
+      "id": "red",
+      "name": "Red"
+    },
+    {
+      "id": "yellow",
+      "name": "Yellow"
+    }
+  ],
+  "racingPrizes": [
+    {
+      "label": "1st",
+      "value": 12
+    },
+    {
+      "label": "2nd",
+      "value": 9
+    },
+    {
+      "label": "3rd",
+      "value": 6
+    },
+    {
+      "label": "4th",
+      "value": 4
+    },
+    {
+      "label": "5th",
+      "value": 2
+    },
+    {
+      "label": "6th",
+      "value": 0
+    }
+  ],
+  "bettingPrizes": [
+    [
+      {
+        "label": "1st",
+        "value": 9
+      },
+      {
+        "label": "2nd",
+        "value": 6
+      },
+      {
+        "label": "3nd",
+        "value": 3
+      }
+    ],
+    [
+      {
+        "label": "1st",
+        "value": 6
+      },
+      {
+        "label": "2nd",
+        "value": 4
+      },
+      {
+        "label": "3nd",
+        "value": 2
+      }
+    ],
+    [
+      {
+        "label": "1st",
+        "value": 3
+      },
+      {
+        "label": "2nd",
+        "value": 2
+      },
+      {
+        "label": "3nd",
+        "value": 1
+      }
+    ]
+  ],
+  "slides": [
+    {
+      "id": "auction",
+      "type": "auction",
+      "title": "The auction",
+      "instructions": "Select the Car(s) you won and money you spent in the auction.",
+      "goToText": "Let's race"
+    },
+    {
+      "id": "race-1",
+      "type": "race",
+      "title": "Race!",
+      "instructions": "After a player's turn cause at least one car to pass the FIRST yellow bid line, tap the 1st BET button.",
+      "goToText": "1st BET"
+    },
+    {
+      "id": "bet-1",
+      "type": "bet",
+      "betIndex": 1,
+      "title": "1st Betting round",
+      "instructions": "Which car will win the race?",
+      "goToText": "Let's race"
+    },
+    {
+      "id": "race-2",
+      "type": "race",
+      "title": "Race!",
+      "instructions": "After a player's turn cause at least one car to pass the SECOND yellow bid line, tap the 2nd BET button.",
+      "goToText": "2nd BET"
+    },
+    {
+      "id": "bet-2",
+      "type": "bet",
+      "betIndex": 2,
+      "title": "2nd Betting round",
+      "instructions": "Which car will win the race?",
+      "goToText": "Let's race"
+    },
+    {
+      "id": "race-3",
+      "type": "race",
+      "title": "Race!",
+      "instructions": "After a player's turn cause at least one car to pass the THIRD yellow bid line, tap the 3rd BET button.",
+      "goToText": "3rd BET"
+    },
+    {
+      "id": "bet-3",
+      "type": "bet",
+      "betIndex": 3,
+      "title": "3rd Betting round",
+      "instructions": "Which car will win the race?",
+      "goToText": "Let's race"
+    },
+    {
+      "id": "finish-line",
+      "type": "finishline",
+      "title": "The finish line!",
+      "instructions": "Select the finish order.",
+      "noCarSelected": "No Car",
+      "goToText": "Get Totals"
+    },
+    {
+      "id": "totals",
+      "type": "totals",
+      "title": "Totals",
+      "racingTitle": "Racing payouts",
+      "racingDesc": "Racing total",
+      "bettingTitle": "Betting payouts",
+      "bettingDesc": "Betting total",
+      "auctionTitle": "Auction prices",
+      "auctionDesc": "Auction total",
+      "totalTitle": "Total winning",
+      "playAgain": "Play again"
+    }
+  ]
+}
