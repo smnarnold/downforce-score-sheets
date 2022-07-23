@@ -1,4 +1,8 @@
+@use '../../styles/placeholders';
+
 .btn {
+  @extend %styledText;
+
   background-color: var(--red);
   border: none;
   color: #fff;

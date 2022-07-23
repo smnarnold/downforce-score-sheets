@@ -1,3 +1,5 @@
+@use '../../styles/placeholders';
+
 .betting-payouts {
   position: relative;
   display: flex;
@@ -8,6 +10,8 @@
   border-bottom: solid var(--border) var(--black);
 
   &__title {
+    @extend %styledText;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,6 +26,12 @@
     display: block;
     position: relative;
     width: 100%;
+
+    tbody {
+      display: block;
+      position: relative;
+      width: 100%;
+    }
   }
 
   &__row {

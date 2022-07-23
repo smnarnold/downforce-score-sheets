@@ -1,3 +1,5 @@
+@use '../../styles/placeholders';
+
 .auctions-list {
   display: block;
   list-style: none;
@@ -26,6 +28,8 @@
   }
 
   &__name {
+    @extend %styledText;
+
     flex-grow: 1;
     text-align: center;
     padding: calc(var(--fz) * 0.5);

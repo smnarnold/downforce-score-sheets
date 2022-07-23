@@ -1,3 +1,5 @@
+@use '../../styles/placeholders';
+
 .total-auction-prices,
 .total-racing-payouts,
 .total-betting-payouts {
@@ -7,6 +9,8 @@
   border-bottom: solid var(--border) var(--black);
 
   &__title {
+    @extend %styledText;
+
     padding: 0.25em calc(var(--fz) * 2);
     margin: 0;
   }
@@ -20,6 +24,8 @@
   }
 
   &__item {
+    @extend %styledText;
+    
     flex: 1 1 0;
     font-size: 0.75em;
     text-align: center;

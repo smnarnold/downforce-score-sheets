@@ -1,3 +1,5 @@
+@use '../../styles/placeholders';
+
 .total {
   position: relative;
   display: flex;
@@ -6,6 +8,12 @@
   padding: 0 calc(var(--fz) * 2);
 
   &__label {
+    @extend %styledText;
+
     margin: 0;
+  }
+
+  &__price {
+    @extend %badge;
   }
 }
