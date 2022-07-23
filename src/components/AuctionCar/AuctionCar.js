@@ -31,7 +31,6 @@ export default function AuctionCar({ id, name, initialValue = 0, onBidChange }) 
           min="1"
           max="6"
           step="1"
-          defaultValue={initialValue}
           onChange={handleValueChange}
           value={price}
           className={`${pfx}__range`}

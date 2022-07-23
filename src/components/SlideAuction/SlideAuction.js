@@ -27,7 +27,7 @@ export default function SlideAuction({
   );
 
   const carItems = cars.map((car) => {
-    return <AuctionCar {...car} onBidChange={handleBidChange} />;
+    return <AuctionCar {...car} key={car.id} onBidChange={handleBidChange} />;
   });
 
   return (

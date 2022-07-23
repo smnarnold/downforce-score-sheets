@@ -30,6 +30,7 @@ export default function SlideBet({
     return (
       <BetCar
         {...car}
+        key={car.id}
         index={betIndex}
         currentBet={bet}
         onBetChange={handleBetChange}

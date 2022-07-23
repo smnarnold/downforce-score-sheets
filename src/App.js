@@ -6,6 +6,7 @@ import SlideAuction from './components/SlideAuction/SlideAuction';
 import SlideRace from './components/SlideRace/SlideRace';
 import SlideBet from './components/SlideBet/SlideBet';
 import SlideFinishLine from './components/SlideFinishLine/SlideFinishLine';
+import SlideTotals from './components/SlideTotals/SlideTotals';
 import MainHeader from './components/MainHeader/MainHeader';
 import Wizard from './components/Wizard/Wizard';
 
@@ -40,6 +41,7 @@ function App() {
         return (
           <SlideAuction
             {...slide}
+            key={`slide-${index}`}
             slideIndex={index}
             cars={data.cars}
             onAuctionChange={(obj) => setAuctionObj(obj)}
@@ -50,6 +52,7 @@ function App() {
           return (
             <SlideRace
               {...slide}
+              key={`slide-${index}`}
               slideIndex={index}
               onSlideChange={(index) => setSlideIndex(index)}
             />
@@ -58,6 +61,7 @@ function App() {
           return (
             <SlideBet
               {...slide}
+              key={`slide-${index}`}
               slideIndex={index}
               cars={data.cars}
               bettingTitle={data.slides[8].bettingTitle}
@@ -70,12 +74,28 @@ function App() {
             return (
               <SlideFinishLine
                 {...slide}
+                key={`slide-${index}`}
                 slideIndex={index}
                 cars={data.cars}
                 finishPosArr={finishPosArr}
                 racingPrizes={data.racingPrizes}
                 onFinishPosChange={handleFinishPosChange}
                 onSlideChange={(index) => setSlideIndex(index)}
+              />
+            );
+          case "totals":
+            return (
+              <SlideTotals
+                {...slide}
+                key={`slide-${index}`}
+                slideIndex={index}
+                auctionObj={auctionObj}
+                betsArr={betsArr}
+                cars={data.cars}
+                finishPosArr={finishPosArr}
+                racingPrizes={data.racingPrizes}
+                bettingPrizes={data.bettingPrizes}
+                restart={restart}
               />
             );
       default:

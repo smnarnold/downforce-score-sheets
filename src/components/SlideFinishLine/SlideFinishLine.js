@@ -20,6 +20,8 @@ export default function SlideFinishLine({
   const ordersLi = cars.map((car, index) => {
     return (
       <CarOrder
+        id={car.id}
+        key={car.id}
         cars={cars}
         posIndex={index}
         racingPrizes={racingPrizes}
@@ -28,10 +30,6 @@ export default function SlideFinishLine({
         onFinishPosChange={onFinishPosChange}
       />
     );
-  });
-
-  const handleFinishPosChange = React.useCallback((index, color) => {
-    onFinishPosChange(index, color);
   });
 
   return (

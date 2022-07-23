@@ -15,7 +15,7 @@ export default function CarOrder({
 
   const optionsArr = cars.map((car) => {
     if (!finishPosArr.includes(car.id) || carTheme == car.id) {
-      return <option value={car.id}>{car.name}</option>;
+      return <option key={car.id} value={car.id}>{car.name}</option>;
     }
   });
 
