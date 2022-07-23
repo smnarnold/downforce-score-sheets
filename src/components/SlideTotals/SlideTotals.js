@@ -30,22 +30,19 @@ export default function SlideTotals({
   const handleRacingTotalChange = React.useCallback(
     (amount) => {
       setRacingTotal(amount);
-    },
-    [racingTotal]
+    }, []
   );
 
   const handleBettingTotalChange = React.useCallback(
     (amount) => {
       setBettingTotal(amount);
-    },
-    [bettingTotal]
+    }, []
   );
 
   const handleAuctionTotalChange = React.useCallback(
     (amount) => {
       setAuctionTotal(amount);
-    },
-    [auctionTotal]
+    }, []
   );
 
   return (

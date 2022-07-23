@@ -5,9 +5,9 @@ export default function AuctionCar({ id, name, initialValue = 0, onBidChange }) 
   const pfx = "auction-item";
   const [check, setCheck] = React.useState(false);
   const [price, setPrice] = React.useState(initialValue);
-  const theme = id != null ? `car-theme-${id}` : "";
+  const theme = id != null && `car-theme-${id}`;
 
-  React.useEffect(() => onBidChange({ price, id }), [id, price]);
+  React.useEffect(() => onBidChange({ price, id }), [id, onBidChange, price]);
 
   function handleValueChange(event) {
     setPrice(parseInt(event.target.value));
