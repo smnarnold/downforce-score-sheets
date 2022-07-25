@@ -1,22 +1,22 @@
-import React from 'react';
+import {useState} from 'react';
 import './AuctionCar.scss';
 
 export default function AuctionCar({ id, name, initialValue = 0, onBidChange }) {
   const pfx = "auction-item";
-  const [check, setCheck] = React.useState(false);
-  const [price, setPrice] = React.useState(initialValue);
+  const [check, setCheck] = useState(false);
+  const [price, setPrice] = useState(initialValue);
   const theme = id != null && `car-theme-${id}`;
-
-  React.useEffect(() => onBidChange({ price, id }), [id, onBidChange, price]);
 
   function handleValueChange(event) {
     setPrice(parseInt(event.target.value));
-  }
+    onBidChange({price, id})
+  };
 
   function toggleCar() {
     setPrice(check ? 0 : 1);
     setCheck(!check);
-  }
+    onBidChange({price, id})
+  };
 
   return (
     <li key={name} className={`${pfx} ${check ? pfx + "--checked" : ""}`}>
@@ -24,7 +24,7 @@ export default function AuctionCar({ id, name, initialValue = 0, onBidChange }) 
         <input type="checkbox" onChange={toggleCar} className={`${pfx}__cb`} />
         <div className={`${pfx}__name ${theme}`}>{name}</div>
       </label>
-
+      
       <div className={`${pfx}__price`}>
         <input
           type="range"
@@ -43,6 +43,7 @@ export default function AuctionCar({ id, name, initialValue = 0, onBidChange }) 
           {price}
         </output>
       </div>
+      
     </li>
   );
 }

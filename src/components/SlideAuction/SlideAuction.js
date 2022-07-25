@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState, useCallback} from 'react';
 import Slide from '../Slide/Slide';
 import './SlideAuction.scss';
 import Instructions from '../Instructions/Instructions';
@@ -14,10 +14,11 @@ export default function SlideAuction({
   onAuctionChange,
   onSlideChange
 }) {
-  const [bidsObj, setBidsObj] = React.useState({});
+  const [bidsObj, setBidsObj] = useState({});
 
-  const handleBidChange = React.useCallback(
+  const handleBidChange = useCallback(
     ({ id, price }) => {
+      // console.log(price);
       let obj = { ...bidsObj, [id]: price };
       if (price === 0) delete obj[id];
       setBidsObj(obj);

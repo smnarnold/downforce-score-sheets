@@ -1,13 +1,13 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import './BetCar.scss';
 
 export default function BetCar({ id, name, index, currentBet, onBetChange }) {
   const pfx = "bet-item";
-  const [check, setCheck] = React.useState(currentBet == id);
+  const [check, setCheck] = useState(currentBet === id);
   const theme = id != null ? `car-theme-${id}` : "";
 
-  React.useEffect(() => {
-    setCheck(currentBet == id);
+  useEffect(() => {
+    setCheck(currentBet === id);
   }, [currentBet, id]);
 
   function toggleRadio(event) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import Slide from '../Slide/Slide';
 import './SlideTotals.scss';
 import formatMoney from '../../helpers/formatMoney';
@@ -23,27 +23,10 @@ export default function SlideTotals({
   bettingPrizes=[],
   restart
 }) {
-  const [racingTotal, setRacingTotal] = React.useState(0);
-  const [bettingTotal, setBettingTotal] = React.useState(0);
-  const [auctionTotal, setAuctionTotal] = React.useState(0);
-
-  const handleRacingTotalChange = React.useCallback(
-    (amount) => {
-      setRacingTotal(amount);
-    }, []
-  );
-
-  const handleBettingTotalChange = React.useCallback(
-    (amount) => {
-      setBettingTotal(amount);
-    }, []
-  );
-
-  const handleAuctionTotalChange = React.useCallback(
-    (amount) => {
-      setAuctionTotal(amount);
-    }, []
-  );
+  
+  const [racingTotal, setRacingTotal] = useState(0);
+  const [bettingTotal, setBettingTotal] = useState(0);
+  const [auctionTotal, setAuctionTotal] = useState(0);
 
   return (
     <Slide type={slideType}>
@@ -55,7 +38,9 @@ export default function SlideTotals({
           finishPosArr={finishPosArr}
           racingPrizes={racingPrizes}
           auctionObj={auctionObj}
-          onRacingTotalChange={handleRacingTotalChange}
+          onRacingTotalChange={(amount) => {
+            setRacingTotal(amount);
+          }}
         />
         <TotalBettingPayouts
           bettingTitle={bettingTitle}
@@ -64,14 +49,18 @@ export default function SlideTotals({
           finishPosArr={finishPosArr}
           betsArr={betsArr}
           bettingPrizes={bettingPrizes}
-          onBettingTotalChange={handleBettingTotalChange}
+          onBettingTotalChange={(amount) => {
+            setBettingTotal(amount);
+          }}
         />
         <TotalAuctionPrices
           auctionTitle={auctionTitle}
           auctionDesc={auctionDesc}
           cars={cars}
           auctionObj={auctionObj}
-          onAuctionTotalChange={handleAuctionTotalChange}
+          onAuctionTotalChange={(amount) => {
+            setAuctionTotal(amount);
+          }}
         />
       </div>
 

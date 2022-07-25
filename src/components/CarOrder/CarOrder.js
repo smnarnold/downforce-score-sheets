@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState} from 'react';
 import './CarOrder.scss';
 
 export default function CarOrder({
@@ -10,7 +10,7 @@ export default function CarOrder({
   onFinishPosChange
 }) {
   const pfx = "car-order";
-  const [carTheme, setCarTheme] = React.useState(null);
+  const [carTheme, setCarTheme] = useState(null);
   const theme = carTheme != null ? `car-theme-${carTheme}` : "";
 
   const optionsArr = cars.map((car) => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState} from 'react';
 import data from './data/downforce.json';
 import './App.scss';
 
@@ -10,11 +10,14 @@ import SlideTotals from './components/SlideTotals/SlideTotals';
 import MainHeader from './components/MainHeader/MainHeader';
 import Wizard from './components/Wizard/Wizard';
 
+
+
 function App() {
-  const [slideIndex, setSlideIndex] = React.useState(data.initial.slideIndex);
-  const [auctionObj, setAuctionObj] = React.useState(data.initial.auctionObj);
-  const [betsArr, setBetsArr] = React.useState(data.initial.betsArr);
-  const [finishPosArr, setFinishPosArr] = React.useState(data.initial.finishPosArr);
+  console.log('App render')
+  const [slideIndex, setSlideIndex] = useState(data.initial.slideIndex);
+  const [auctionObj, setAuctionObj] = useState(data.initial.auctionObj);
+  const [betsArr, setBetsArr] = useState(data.initial.betsArr);
+  const [finishPosArr, setFinishPosArr] = useState(data.initial.finishPosArr);
 
   function restart() {
     setSlideIndex(data.initial.slideIndex);
@@ -99,9 +102,16 @@ function App() {
               />
             );
       default:
-      // To do: create a default slide
+        return null;
     }
   });
+
+  //console.log(slides)
+
+  
+
+  
+
 
   return (
     <div className="App">

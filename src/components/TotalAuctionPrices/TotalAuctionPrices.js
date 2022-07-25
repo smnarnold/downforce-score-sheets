@@ -1,4 +1,3 @@
-import React from 'react';
 import './TotalAuctionPrices.scss';
 import formatMoney from '../../helpers/formatMoney';
 
@@ -28,7 +27,7 @@ export default function TotalAuctionPrices({
       >
         {car.name}
         <span className={`${pfx}__item__price`}>
-          {formatMoney(auctionObj[car.id])}
+          {auctionObj[car.id] && formatMoney(auctionObj[car.id])}
         </span>
       </div>
     );

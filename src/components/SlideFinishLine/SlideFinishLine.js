@@ -1,4 +1,3 @@
-import React from 'react';
 import Slide from '../Slide/Slide';
 import CarOrder from '../CarOrder/CarOrder';
 import Instructions from '../Instructions/Instructions';

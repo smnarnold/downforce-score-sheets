@@ -1,4 +1,3 @@
-import React from 'react';
 import './TotalBettingPayouts.scss';
 import formatMoney from '../../helpers/formatMoney';
 
@@ -35,7 +34,7 @@ export default function TotalBettingPayouts({
     totalPrice += value;
 
     return (
-      <div className={`${pfx}__item ${pfx}__item--checked ${theme}`}>
+      <div key={color} className={`${pfx}__item ${pfx}__item--checked ${theme}`}>
         <div className={`${pfx}__item__name`}>{name}</div>
         <div className={`${pfx}__item__name`}>{formatMoney(value)}</div>
       </div>

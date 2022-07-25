@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState, useCallback} from 'react';
 import Slide from '../Slide/Slide';
 import './SlideBet.scss';
 import Instructions from '../Instructions/Instructions';
@@ -18,13 +18,13 @@ export default function SlideBet({
   onSlideChange,
   onBetsChange
 }) {
-  const [bet, setBet] = React.useState(null);
+  const [bet, setBet] = useState(null);
   const prizesArr = bettingPrizes[betIndex - 1];
 
-  const handleBetChange = React.useCallback((color) => {
+  const handleBetChange = useCallback((color) => {
     setBet(color);
     onBetsChange(betIndex - 1, color);
-  });
+  }, [betIndex, onBetsChange]);
 
   const carItems = cars.map((car) => {
     return (

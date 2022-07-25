@@ -1,4 +1,3 @@
-import React from 'react';
 import Slide from '../Slide/Slide';
 import './SlideRace.scss';
 import Instructions from '../Instructions/Instructions';
