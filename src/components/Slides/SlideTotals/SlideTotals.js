@@ -1,10 +1,10 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import Slide from '../Slide/Slide';
 import './SlideTotals.scss';
-import formatMoney from '../../helpers/formatMoney';
-import TotalRacingPayouts from '../TotalRacingPayouts/TotalRacingPayouts';
-import TotalBettingPayouts from '../TotalBettingPayouts/TotalBettingPayouts';
-import TotalAuctionPrices from '../TotalAuctionPrices/TotalAuctionPrices';
+import formatMoney from '../../../helpers/formatMoney';
+import TotalRacingPayouts from '../../TotalRacingPayouts/TotalRacingPayouts';
+import TotalBettingPayouts from '../../TotalBettingPayouts/TotalBettingPayouts';
+import TotalAuctionPrices from '../../TotalAuctionPrices/TotalAuctionPrices';
 
 export default function SlideTotals({
   type: slideType = "totals",
@@ -25,8 +25,34 @@ export default function SlideTotals({
 }) {
   
   const [racingTotal, setRacingTotal] = useState(0);
-  const [bettingTotal, setBettingTotal] = useState(0);
-  const [auctionTotal, setAuctionTotal] = useState(0);
+
+  const podiumArr = finishPosArr.slice(0, 3);
+  const auctionArr = Object.values(auctionObj);
+  const auctionTotal =
+    auctionArr.reduce((total, price) => total + price, 0) * -1;
+
+  const bettingArr = getBettingFormattedArr();
+  console.log(bettingArr);
+  const bettingTotal = bettingArr.map((bet) => bet.amount).reduce((total, amount) => total + amount, 0);
+
+  function getBettingFormattedArr() {
+    let bettingArr = [];
+      
+    betsArr.forEach((color, index) => {
+      let amount = 0;
+      let posIndex = podiumArr.indexOf(color);
+
+      if (posIndex !== -1) {
+        amount += bettingPrizes[index][posIndex].value;
+      }
+
+      bettingArr.push({
+        color: color,
+        amount: amount
+      });
+    });
+    return bettingArr;
+  }
 
   return (
     <Slide type={slideType}>
@@ -46,21 +72,15 @@ export default function SlideTotals({
           bettingTitle={bettingTitle}
           bettingDesc={bettingDesc}
           cars={cars}
-          finishPosArr={finishPosArr}
-          betsArr={betsArr}
-          bettingPrizes={bettingPrizes}
-          onBettingTotalChange={(amount) => {
-            setBettingTotal(amount);
-          }}
+          bettingArr={bettingArr}
+          total={bettingTotal}
         />
         <TotalAuctionPrices
           auctionTitle={auctionTitle}
           auctionDesc={auctionDesc}
           cars={cars}
           auctionObj={auctionObj}
-          onAuctionTotalChange={(amount) => {
-            setAuctionTotal(amount);
-          }}
+          money={auctionTotal}
         />
       </div>
 

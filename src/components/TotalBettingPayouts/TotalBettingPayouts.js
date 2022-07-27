@@ -5,43 +5,30 @@ export default function TotalBettingPayouts({
   bettingTitle = "",
   bettingDesc = "",
   cars = [],
-  finishPosArr = [],
-  bettingPrizes = [],
-  betsArr = [],
-  onBettingTotalChange
+  bettingArr = [],
+  total = 0
 }) {
   const pfx = "total-betting-payouts";
-  const podiumArr = finishPosArr.slice(0, 3);
-  let totalPrice = 0;
 
-  const summaryArr = betsArr.map((color, index) => {
+  const summaryArr = bettingArr.map((bet, index) => {
     let car, theme;
     let name = "";
     let value = 0;
 
-    if (color !== "") {
-      car = cars.filter((car) => car.id === color)[0];
+    if (bet.color !== "") {
+      car = cars.filter((car) => car.id === bet.color)[0];
       theme = `car-theme-${car.id}`;
       name = car.name;
-      value = 0;
-      let posIndex = podiumArr.indexOf(color);
-
-      if (posIndex !== -1) {
-        value = bettingPrizes[index][posIndex].value;
-      }
+      value = bet.amount;
     }
 
-    totalPrice += value;
-
     return (
-      <div key={color} className={`${pfx}__item ${pfx}__item--checked ${theme}`}>
+      <div key={`bet-${index}`} className={`${pfx}__item ${pfx}__item--checked ${theme}`}>
         <div className={`${pfx}__item__name`}>{name}</div>
         <div className={`${pfx}__item__name`}>{formatMoney(value)}</div>
       </div>
     );
   });
-
-  onBettingTotalChange(totalPrice);
 
   return (
     <div className={pfx}>
@@ -50,7 +37,7 @@ export default function TotalBettingPayouts({
       <div className={`${pfx}__total`}>
         <span className={`${pfx}__total__label`}>{bettingDesc}</span>
         <strong className={`${pfx}__total__price`}>
-          {formatMoney(totalPrice)}
+          {formatMoney(total)}
         </strong>
       </div>
     </div>

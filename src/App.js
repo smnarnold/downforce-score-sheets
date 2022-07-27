@@ -2,15 +2,13 @@ import {useState} from 'react';
 import data from './data/downforce.json';
 import './App.scss';
 
-import SlideAuction from './components/SlideAuction/SlideAuction';
-import SlideRace from './components/SlideRace/SlideRace';
-import SlideBet from './components/SlideBet/SlideBet';
-import SlideFinishLine from './components/SlideFinishLine/SlideFinishLine';
-import SlideTotals from './components/SlideTotals/SlideTotals';
+import SlideAuction from './components/Slides/SlideAuction/SlideAuction';
+import SlideRace from './components/Slides/SlideRace/SlideRace';
+import SlideBet from './components/Slides/SlideBet/SlideBet';
+import SlideFinishLine from './components/Slides/SlideFinishLine/SlideFinishLine';
+import SlideTotals from './components/Slides/SlideTotals/SlideTotals';
 import MainHeader from './components/MainHeader/MainHeader';
 import Wizard from './components/Wizard/Wizard';
-
-
 
 function App() {
   console.log('App render')
@@ -105,13 +103,6 @@ function App() {
         return null;
     }
   });
-
-  //console.log(slides)
-
-  
-
-  
-
 
   return (
     <div className="App">

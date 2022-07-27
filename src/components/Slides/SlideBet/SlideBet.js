@@ -1,10 +1,10 @@
 import {useState, useCallback} from 'react';
 import Slide from '../Slide/Slide';
 import './SlideBet.scss';
-import Instructions from '../Instructions/Instructions';
-import BetCar from '../BetCar/BetCar';
-import BettingPayouts from '../BettingPayouts/BettingPayouts';
-import Btn from '../Btn/Btn';
+import Instructions from '../../Instructions/Instructions';
+import BetCar from '../../BetCar/BetCar';
+import BettingPayouts from '../../BettingPayouts/BettingPayouts';
+import Btn from '../../UI/Btn/Btn';
 
 export default function SlideBet({
   slideIndex = 0,

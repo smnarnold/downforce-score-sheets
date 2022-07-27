@@ -1,20 +1,15 @@
-import './TotalAuctionPrices.scss';
 import formatMoney from '../../helpers/formatMoney';
+import MoneyTag from '../UI/MoneyTag/MoneyTag';
+import './TotalAuctionPrices.scss';
 
 export default function TotalAuctionPrices({
   auctionTitle = "",
   auctionDesc = "",
   cars = [],
   auctionObj = {},
-  onAuctionTotalChange
+  money = 0,
 }) {
   const pfx = "total-auction-prices";
-  const auctionArr = Object.values(auctionObj);
-  const auctionTotal =
-    auctionArr.reduce((total, price) => total + price, 0) * -1;
-
-  onAuctionTotalChange(auctionTotal);
-
   const summaryArr = cars.map((car) => {
     const hasBidOn = auctionObj.hasOwnProperty(car.id);
 
@@ -39,9 +34,7 @@ export default function TotalAuctionPrices({
       <div className={`${pfx}__summary`}>{summaryArr}</div>
       <div className={`${pfx}__total`}>
         <span className={`${pfx}__total__label`}>{auctionDesc}</span>
-        <strong className={`${pfx}__total__price`}>
-          {formatMoney(auctionTotal)}
-        </strong>
+        <MoneyTag amount={money} />
       </div>
     </div>
   );

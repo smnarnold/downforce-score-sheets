@@ -1,7 +1,7 @@
 import Slide from '../Slide/Slide';
 import './SlideRace.scss';
-import Instructions from '../Instructions/Instructions';
-import Btn from '../Btn/Btn';
+import Instructions from '../../Instructions/Instructions';
+import Btn from '../../UI/Btn/Btn';
 
 export default function SlideRace({
   slideIndex = 0,

@@ -1,7 +1,7 @@
 import Slide from '../Slide/Slide';
-import CarOrder from '../CarOrder/CarOrder';
-import Instructions from '../Instructions/Instructions';
-import Btn from '../Btn/Btn';
+import CarOrder from '../../CarOrder/CarOrder';
+import Instructions from '../../Instructions/Instructions';
+import Btn from '../../UI/Btn/Btn';
 import './SlideFinishLine.scss'
 
 export default function SlideFinishLine({

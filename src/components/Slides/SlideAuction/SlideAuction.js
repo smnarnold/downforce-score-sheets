@@ -1,9 +1,9 @@
 import {useState, useCallback} from 'react';
 import Slide from '../Slide/Slide';
 import './SlideAuction.scss';
-import Instructions from '../Instructions/Instructions';
-import AuctionCar from '../AuctionCar/AuctionCar';
-import Btn from '../Btn/Btn';
+import Instructions from '../../Instructions/Instructions';
+import AuctionCar from '../../AuctionCar/AuctionCar';
+import Btn from '../../UI/Btn/Btn';
 
 export default function SlideAuction({
   slideIndex = 0,
