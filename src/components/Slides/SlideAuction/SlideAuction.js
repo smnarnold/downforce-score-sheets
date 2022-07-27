@@ -18,7 +18,6 @@ export default function SlideAuction({
 
   const handleBidChange = useCallback(
     ({ id, price }) => {
-      // console.log(price);
       let obj = { ...bidsObj, [id]: price };
       if (price === 0) delete obj[id];
       setBidsObj(obj);

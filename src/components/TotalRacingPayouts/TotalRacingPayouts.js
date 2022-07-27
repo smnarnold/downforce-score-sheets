@@ -1,5 +1,6 @@
 import './TotalRacingPayouts.scss';
 import formatMoney from '../../helpers/formatMoney';
+import MoneyTag from '../UI/MoneyTag/MoneyTag';
 
 export default function TotalRacingPayouts({
   racingTitle = "",
@@ -48,7 +49,7 @@ export default function TotalRacingPayouts({
       <div className={`${pfx}__summary`}>{summaryArr}</div>
       <div className={`${pfx}__total`}>
         <span className={`${pfx}__total__label`}>{racingDesc}</span>
-        <strong className={`${pfx}__total__price`}>{formatMoney(gain)}</strong>
+        <MoneyTag amount={gain} />
       </div>
     </div>
   );

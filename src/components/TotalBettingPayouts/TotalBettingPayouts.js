@@ -1,5 +1,6 @@
 import './TotalBettingPayouts.scss';
 import formatMoney from '../../helpers/formatMoney';
+import MoneyTag from '../UI/MoneyTag/MoneyTag';
 
 export default function TotalBettingPayouts({
   bettingTitle = "",
@@ -36,9 +37,7 @@ export default function TotalBettingPayouts({
       <div className={`${pfx}__summary`}>{summaryArr}</div>
       <div className={`${pfx}__total`}>
         <span className={`${pfx}__total__label`}>{bettingDesc}</span>
-        <strong className={`${pfx}__total__price`}>
-          {formatMoney(total)}
-        </strong>
+        <MoneyTag amount={total} />
       </div>
     </div>
   );

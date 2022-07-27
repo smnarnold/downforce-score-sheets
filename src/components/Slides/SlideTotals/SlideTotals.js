@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import Slide from '../Slide/Slide';
 import './SlideTotals.scss';
-import formatMoney from '../../../helpers/formatMoney';
+import MoneyTag from '../../UI/MoneyTag/MoneyTag';
 import TotalRacingPayouts from '../../TotalRacingPayouts/TotalRacingPayouts';
 import TotalBettingPayouts from '../../TotalBettingPayouts/TotalBettingPayouts';
 import TotalAuctionPrices from '../../TotalAuctionPrices/TotalAuctionPrices';
@@ -32,7 +32,6 @@ export default function SlideTotals({
     auctionArr.reduce((total, price) => total + price, 0) * -1;
 
   const bettingArr = getBettingFormattedArr();
-  console.log(bettingArr);
   const bettingTotal = bettingArr.map((bet) => bet.amount).reduce((total, amount) => total + amount, 0);
 
   function getBettingFormattedArr() {
@@ -86,9 +85,7 @@ export default function SlideTotals({
 
       <footer className="total">
         <h3 className="total__label">{totalTitle}</h3>
-        <div className="total__money">
-          {formatMoney(racingTotal + bettingTotal + auctionTotal)}
-        </div>
+        <MoneyTag amount={racingTotal + bettingTotal + auctionTotal} />
         <button className="btn" onClick={restart}>
           restart
         </button>
