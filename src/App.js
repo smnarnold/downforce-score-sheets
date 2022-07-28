@@ -11,7 +11,6 @@ import MainHeader from './components/MainHeader/MainHeader';
 import Wizard from './components/Wizard/Wizard';
 
 function App() {
-  console.log('App render')
   const [slideIndex, setSlideIndex] = useState(data.initial.slideIndex);
   const [auctionObj, setAuctionObj] = useState(data.initial.auctionObj);
   const [betsArr, setBetsArr] = useState(data.initial.betsArr);

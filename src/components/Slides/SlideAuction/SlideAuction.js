@@ -14,6 +14,7 @@ export default function SlideAuction({
   onAuctionChange,
   onSlideChange
 }) {
+  
   const [bidsObj, setBidsObj] = useState({});
 
   const handleBidChange = useCallback(
