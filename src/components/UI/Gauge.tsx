@@ -50,6 +50,15 @@ const StyledGauge = styled.div`
     }
 `;
 
+interface GaugeProps {
+  value?: number;
+  min?: number;
+  max?: number;
+  step?: number;
+  disabled?: boolean;
+  callback: (value: number) => void;
+}
+
 function Gauge({
   value = 0,
   min = 0,
@@ -57,14 +66,14 @@ function Gauge({
   step = 1,
   disabled = false,
   callback,
-}) {
+}: GaugeProps) {
   const [thumbPos, setThumbPos] = useState(0);
 
   useEffect(() => {
     setThumbPos((Math.max(0, value - min) / (max - min)) * 100);
   }, [value, min, max]);
 
-  function handleChange(e) {
+  function handleChange(e: { target: { value: string; }; }) {
     const val = parseInt(e.target.value);
     callback(val);
   }

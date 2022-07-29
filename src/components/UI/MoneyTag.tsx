@@ -10,7 +10,7 @@ const StyledMoneyTag = styled.strong`
     margin-left: 0.5em;
 `;
 
-function MoneyTag({ amount }) {
+function MoneyTag({ amount }: { amount: number }) {
     return <StyledMoneyTag className="money-tag">{formatMoney(amount)}</StyledMoneyTag>;
 }
 

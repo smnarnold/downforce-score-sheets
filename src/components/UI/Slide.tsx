@@ -11,7 +11,9 @@ const StyledSection = styled.section`
     flex-direction: column;
     align-items: center;
 
-    &:only-child { justify-content: center; }
+    &:only-child {
+      justify-content: center;
+    }
   }
 
   > header,
@@ -20,8 +22,12 @@ const StyledSection = styled.section`
     position: relative;
     width: 100%;
 
-    > *:first-child { margin-top: 0; }
-    > *:last-child { margin-bottom: 0; }
+    > *:first-child {
+      margin-top: 0;
+    }
+    > *:last-child {
+      margin-bottom: 0;
+    }
   }
 
   > header,
@@ -29,7 +35,11 @@ const StyledSection = styled.section`
     padding: 20px 0;
     flex: 0 0 auto;
 
-    h1,h2,h3 { margin: 0; }
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+    }
   }
 
   > footer {
@@ -40,11 +50,12 @@ const StyledSection = styled.section`
   }
 `;
 
-export default function Slide({header, body, footer}) {
+export default function Slide({ header = null, body = null, footer = null }) {
   return (
     <StyledSection className="slide">
       {header && <header>{header}</header>}
       {body && <div className="body">{body}</div>}
       {footer && <footer>{footer}</footer>}
-    </StyledSection>);
+    </StyledSection>
+  );
 }

@@ -1,5 +1,5 @@
-import {useState} from 'react';
-import './CarOrder.scss';
+import { useState } from "react";
+import "./CarOrder.scss";
 
 export default function CarOrder({
   posIndex,
@@ -7,15 +7,19 @@ export default function CarOrder({
   racingPrizes = [],
   defaultOption,
   finishPosArr,
-  onFinishPosChange
+  onFinishPosChange,
 }) {
   const pfx = "car-order";
   const [carTheme, setCarTheme] = useState(null);
   const theme = carTheme != null ? `car-theme-${carTheme}` : "";
-
-  const optionsArr = cars.map((car) => {
-    if (!finishPosArr.includes(car.id) || carTheme == car.id) {
-      return <option key={car.id} value={car.id}>{car.name}</option>;
+  const optionsArr = [];
+  cars.forEach((car) => {
+    if (!finishPosArr.includes(car.id) || carTheme === car.id) {
+      optionsArr.push(
+        <option key={car.id} value={car.id}>
+          {car.name}
+        </option>
+      );
     }
   });
 
