@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const Range = styled.div`
+const StyledGauge = styled.div`
     position: relative;
     flex: 0 0 calc(60% - var(--fz));
     margin-left: var(--fz);
@@ -48,10 +48,6 @@ const Range = styled.div`
         transform: translate(-50%, -50%);
         pointer-events: none;
     }
-
-    &--checked {
-        opacity: 1;
-    }
 `;
 
 function Gauge({
@@ -74,7 +70,7 @@ function Gauge({
   }
 
   return (
-    <Range className="gauge">
+    <StyledGauge>
       <input
         type="range"
         min={min}
@@ -85,7 +81,7 @@ function Gauge({
         disabled={disabled}
       />
       <output style={{ left: `${thumbPos}%` }}>{value}</output>
-    </Range>
+    </StyledGauge>
   );
 }
 

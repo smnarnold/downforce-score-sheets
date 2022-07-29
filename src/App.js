@@ -2,13 +2,13 @@ import {useState} from 'react';
 import data from './data/downforce.json';
 import './App.scss';
 
-import SlideAuction from './components/Slides/SlideAuction/SlideAuction';
-import SlideRace from './components/Slides/SlideRace/SlideRace';
-import SlideBet from './components/Slides/SlideBet/SlideBet';
+import SlideAuction from './components/Slides/Auction';
+import SlideRace from './components/Slides/Race';
+import SlideBet from './components/Slides/Bet';
 import SlideFinishLine from './components/Slides/SlideFinishLine/SlideFinishLine';
-import SlideTotals from './components/Slides/SlideTotals/SlideTotals';
+import SlideTotals from './components/Slides/Totals';
 import MainHeader from './components/MainHeader/MainHeader';
-import Wizard from './components/Wizard/Wizard';
+import Wizard from './components/UI/Wizard';
 
 function App() {
   const [slideIndex, setSlideIndex] = useState(data.initial.slideIndex);
@@ -110,9 +110,9 @@ function App() {
         slideTitle={data.slides[slideIndex].title}
         onSlideChange={(prev) => setSlideIndex(prev)} />
 
-      <Wizard slideIndex={slideIndex} slidesTotal={data.slides.length}>
-        {slides}
-      </Wizard>
+        <Wizard slideIndex={slideIndex} slidesTotal={data.slides.length}>
+          {slides}
+        </Wizard>
     </div>
   );
 }

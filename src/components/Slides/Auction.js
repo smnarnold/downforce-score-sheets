@@ -1,9 +1,8 @@
-import {useState, useCallback} from 'react';
-import Slide from '../Slide/Slide';
-import './SlideAuction.scss';
-import Instructions from '../../Instructions/Instructions';
-import AuctionCar from '../../AuctionCar/AuctionCar';
-import Btn from '../../UI/Btn/Btn';
+import { useState, useCallback } from "react";
+import Slide from "../UI/Slide";
+import Instructions from "../UI/Instructions";
+import AuctionCar from "../AuctionCar/AuctionCar";
+import Btn from "../UI/Btn";
 
 export default function SlideAuction({
   slideIndex = 0,
@@ -12,10 +11,10 @@ export default function SlideAuction({
   cars = [],
   goToText = "",
   onAuctionChange,
-  onSlideChange
+  onSlideChange,
 }) {
-  
   const [bidsObj, setBidsObj] = useState({});
+  const btnIsDisabled = Boolean(!Object.keys(bidsObj).length);
 
   const handleBidChange = useCallback(
     ({ id, price }) => {
@@ -32,20 +31,16 @@ export default function SlideAuction({
   });
 
   return (
-    <Slide type={slideType}>
-      <div className="slide__body">
-        <Instructions text={instructions} />
-        <ul className="auctions-list">{carItems}</ul>
-      </div>
-
-      <footer className="slide__footer">
+    <Slide
+      header={<Instructions text={instructions} />}
+      body={<ul className="auctions-list">{carItems}</ul>}
+      footer={
         <Btn
-          disabled={Boolean(!Object.keys(bidsObj).length)}
+          text={goToText}
+          disabled={btnIsDisabled}
           callback={() => onSlideChange(slideIndex + 1)}
-        >
-          {goToText}
-        </Btn>
-      </footer>
-    </Slide>
+        />
+      }
+    />
   );
 }

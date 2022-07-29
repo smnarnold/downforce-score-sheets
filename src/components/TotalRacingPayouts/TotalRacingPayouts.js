@@ -1,6 +1,6 @@
 import './TotalRacingPayouts.scss';
 import formatMoney from '../../helpers/formatMoney';
-import MoneyTag from '../UI/MoneyTag/MoneyTag';
+import MoneyTag from '../UI/MoneyTag';
 
 export default function TotalRacingPayouts({
   racingTitle = "",

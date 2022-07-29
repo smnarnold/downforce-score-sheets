@@ -1,9 +1,12 @@
 .car-order {
   position: relative;
   width: 100%;
+  min-height: var(--stripe-height);
   margin: 0;
-  border-top: solid var(--border-small) var(--black);
-  border-bottom: solid var(--border-small) var(--black);
+
+  &:not([class*="theme"]):nth-child(odd) {
+    background-color: rgba(0,0,0,.05)
+  }
 
   &__label {
     display: flex;

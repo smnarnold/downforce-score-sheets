@@ -1,38 +1,27 @@
 @use '../../styles/placeholders';
 
-.bets-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: solid var(--border-small) var(--black);
-  border-bottom: solid var(--border-small) var(--black);
-}
-
 .bet-item {
+  @extend %styledText;
   $block: &;
 
-  border-top: solid var(--border-small) var(--black);
-  border-bottom: solid var(--border-small) var(--black);
-  opacity: 0.5;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: var(--stripe-height);
+  padding: calc(var(--fz) * 0.5);
+  opacity: 0.65;
 
   &__radio {
-    margin: 0 var(--fz) 0 calc(var(--fz) * 2);
+    position: absolute;
+    top: 50%;
+    left: calc(var(--fz) * 2);
+    transform: translateY(-50%);
+    margin: 0;
   }
 
-  &__label {
-    position: relative;
-    display: flex;
-  }
-
-  &__name {
-    @extend %styledText;
-
-    flex-grow: 1;
-    text-align: center;
-    padding: calc(var(--fz) * 0.5);
-    border-left: solid 2px var(--black);
-  }
-
+  &:hover,
   &--checked {
     opacity: 1;
   }

@@ -2,7 +2,6 @@ import {useState, useEffect} from 'react';
 import Gauge from '../UI/Gauge';
 import './AuctionCar.scss';
 
-
 export default function AuctionCar({ id, name, initialValue = 0, onBidChange }) {
   const pfx = "auction-item";
   const [checked, setChecked] = useState(false);
@@ -28,10 +27,10 @@ export default function AuctionCar({ id, name, initialValue = 0, onBidChange }) 
   };
 
   return (
-    <li key={name} className={`${pfx} ${checked ? pfx + "--checked" : ""}`}>
+    <li key={name} className={`${pfx} ${checked ? pfx + "--checked" : ""} ${theme}`}>
       <label className={`${pfx}__label`}>
         <input type="checkbox" onChange={toggleCar} className={`${pfx}__cb`} />
-        <div className={`${pfx}__name ${theme}`}>{name}</div>
+        <div className={`${pfx}__name`}>{name}</div>
       </label>
 
       <Gauge value={price} min={1} max={6} step={1} disabled={!checked} callback={handlePriceChange} />

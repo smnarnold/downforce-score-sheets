@@ -1,9 +1,9 @@
 .finishline {
   &__order {
+    display: block;
+    width: 100%;
     list-style: none;
     margin: 0;
     padding: 0;
-    border-top: solid var(--border-small) var(--black);
-    border-bottom: solid var(--border-small) var(--black);
   }
 }

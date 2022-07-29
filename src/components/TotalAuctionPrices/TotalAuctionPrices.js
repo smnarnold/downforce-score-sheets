@@ -1,5 +1,5 @@
 import formatMoney from '../../helpers/formatMoney';
-import MoneyTag from '../UI/MoneyTag/MoneyTag';
+import MoneyTag from '../UI/MoneyTag';
 import './TotalAuctionPrices.scss';
 
 export default function TotalAuctionPrices({

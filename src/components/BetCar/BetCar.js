@@ -16,18 +16,16 @@ export default function BetCar({ id, name, index, currentBet, onBetChange }) {
   }
 
   return (
-    <li key={id} className={`${pfx} ${check ? pfx + "--checked" : ""}`}>
-      <label className={`${pfx}__label`}>
-        <input
-          type="radio"
-          name={`bet-${index}`}
-          value={id}
-          className={`${pfx}__radio`}
-          onChange={toggleRadio}
-        />
+    <label key={id} className={`${pfx} ${check ? pfx + "--checked" : ""} ${theme}`}>
+      <input
+        type="radio"
+        name={`bet-${index}`}
+        value={id}
+        className={`${pfx}__radio`}
+        onChange={toggleRadio}
+      />
 
-        <div className={`${pfx}__name ${theme}`}>{name}</div>
-      </label>
-    </li>
+      {name}
+    </label>
   );
 }

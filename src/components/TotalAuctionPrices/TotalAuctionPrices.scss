@@ -5,8 +5,6 @@
 .total-betting-payouts {
   position: relative;
   width: 100%;
-  border-top: solid var(--border) var(--black);
-  border-bottom: solid var(--border) var(--black);
 
   &__title {
     @extend %styledText;

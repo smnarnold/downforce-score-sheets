@@ -1,8 +1,8 @@
-import Slide from '../Slide/Slide';
-import CarOrder from '../../CarOrder/CarOrder';
-import Instructions from '../../Instructions/Instructions';
-import Btn from '../../UI/Btn/Btn';
-import './SlideFinishLine.scss'
+import Slide from "../../UI/Slide";
+import CarOrder from "../../CarOrder/CarOrder";
+import Instructions from "../../UI/Instructions";
+import Btn from "../../UI/Btn";
+import "./SlideFinishLine.scss";
 
 export default function SlideFinishLine({
   slideIndex = 0,
@@ -14,7 +14,7 @@ export default function SlideFinishLine({
   finishPosArr = [],
   noCarSelected = "No car",
   onFinishPosChange,
-  onSlideChange
+  onSlideChange,
 }) {
   const ordersLi = cars.map((car, index) => {
     return (
@@ -32,20 +32,16 @@ export default function SlideFinishLine({
   });
 
   return (
-    <Slide type={slideType}>
-      <div className="slide__body">
-        <Instructions text={instructions} />
-        <ol className={`${slideType}__order`}>{ordersLi}</ol>
-      </div>
-
-      <footer className="slide__footer">
+    <Slide
+      header={<Instructions text={instructions} />}
+      body={<ol className={`${slideType}__order`}>{ordersLi}</ol>}
+      footer={
         <Btn
+          text={goToText}
           disabled={finishPosArr[0] === ""}
           callback={() => onSlideChange(slideIndex + 1)}
-        >
-          {goToText}
-        </Btn>
-      </footer>
-    </Slide>
+        />
+      }
+    />
   );
 }
