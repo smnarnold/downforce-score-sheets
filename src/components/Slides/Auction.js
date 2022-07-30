@@ -1,31 +1,32 @@
 import { useState, useCallback } from "react";
 import Slide from "../UI/Slide";
 import Instructions from "../UI/Instructions";
-import AuctionCar from "../AuctionCar/AuctionCar";
+import AuctionCar from "../UI/RangeCarPrice";
 import Btn from "../UI/Btn";
 
 export default function SlideAuction({
   slideIndex = 0,
-  type: slideType = "auction",
   instructions = "",
   cars = [],
   goToText = "",
   onAuctionChange,
   onSlideChange,
 }) {
-  const [bidsObj, setBidsObj] = useState({});
-  const btnIsDisabled = Boolean(!Object.keys(bidsObj).length);
+  const [auctionObj, setAuctionObj] = useState({});
+  const btnIsDisabled = Boolean(!Object.keys(auctionObj).length);
 
-  const handleBidChange = useCallback(
-    ({ id, price }) => {
-      let obj = { ...bidsObj, [id]: price };
-      if (price === 0) delete obj[id];
-      setBidsObj(obj);
-      onAuctionChange(obj);
-    },
-    [bidsObj]
-  );
+  function handleBidChange({ id, price }) {
+    let obj = { ...auctionObj, [id]: price };
+    if (price === 0) delete obj[id];
 
+    setAuctionObj(obj);
+  };
+
+  function handleCompleted() {
+    onAuctionChange(auctionObj);
+    onSlideChange(slideIndex + 1);
+  }
+  
   const carItems = cars.map((car) => {
     return <AuctionCar {...car} key={car.id} onBidChange={handleBidChange} />;
   });
@@ -33,12 +34,12 @@ export default function SlideAuction({
   return (
     <Slide
       header={<Instructions text={instructions} />}
-      body={<ul className="auctions-list">{carItems}</ul>}
+      body={carItems}
       footer={
         <Btn
           text={goToText}
           disabled={btnIsDisabled}
-          callback={() => onSlideChange(slideIndex + 1)}
+          callback={handleCompleted}
         />
       }
     />

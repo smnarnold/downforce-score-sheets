@@ -5,13 +5,14 @@ import './App.scss';
 import SlideAuction from './components/Slides/Auction';
 import SlideRace from './components/Slides/Race';
 import SlideBet from './components/Slides/Bet';
-import SlideFinishLine from './components/Slides/SlideFinishLine/SlideFinishLine';
+import SlideFinishLine from './components/Slides/FinishLine';
 import SlideTotals from './components/Slides/Totals';
-import MainHeader from './components/MainHeader/MainHeader';
+import MainHeader from './components/UI/MainHeader';
 import Wizard from './components/UI/Wizard';
 
 function App() {
-  const [slideIndex, setSlideIndex] = useState(data.initial.slideIndex);
+  //const [slideIndex, setSlideIndex] = useState(data.initial.slideIndex);
+  const [slideIndex, setSlideIndex] = useState(0);
   const [auctionObj, setAuctionObj] = useState(data.initial.auctionObj);
   const [betsArr, setBetsArr] = useState(data.initial.betsArr);
   const [finishPosArr, setFinishPosArr] = useState(data.initial.finishPosArr);
@@ -23,16 +24,14 @@ function App() {
     setFinishPosArr(data.initial.finishPosArr);
   }
 
-  function handleBetChange(index, color) {
+  function handleBetChange(betIndex, id) {
     const tmp = [...betsArr];
-    tmp[index] = color;
+    tmp[betIndex] = id;
     setBetsArr(tmp);
   }
 
-  function handleFinishPosChange(index, color) {
-    const tmp = [...finishPosArr];
-    tmp[index] = color;
-    setFinishPosArr(tmp);
+  function handleFinishPosChange(carsOrderArr) {
+    setFinishPosArr(carsOrderArr);
   }
 
   const slides = data.slides.map((slide, index) => {
@@ -77,7 +76,6 @@ function App() {
                 key={`slide-${index}`}
                 slideIndex={index}
                 cars={data.cars}
-                finishPosArr={finishPosArr}
                 racingPrizes={data.racingPrizes}
                 onFinishPosChange={handleFinishPosChange}
                 onSlideChange={(index) => setSlideIndex(index)}
