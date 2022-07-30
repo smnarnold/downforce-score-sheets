@@ -1,13 +1,12 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Slide from '../UI/Slide';
 import MoneyTag from '../UI/MoneyTag';
-import TotalRacingPayouts from '../TotalRacingPayouts/TotalRacingPayouts';
-import TotalBettingPayouts from '../TotalBettingPayouts/TotalBettingPayouts';
+import TotalRacingPayouts from '../UI/TotalRacingPayouts';
+import TotalBettingPayouts from '../UI/TotalBettingPayouts';
 import TotalAuctionPrices from '../TotalAuctionPrices/TotalAuctionPrices';
 import Btn from '../UI/Btn';
 
 export default function SlideTotals({
-  type: slideType = "totals",
   racingTitle = "Racing payouts",
   racingDesc = "Racing total",
   bettingTitle = "Betting payouts",
@@ -25,32 +24,63 @@ export default function SlideTotals({
 }) {
   
   const [racingTotal, setRacingTotal] = useState(0);
+  const [auctionTotal, setAuctionTotal] = useState(0);
+  const [bettingTotal, setBettingTotal] = useState(0);
+  const [podiumArr, setPodiumArr] = useState([]);
+  const [bettingArr, setBettingArr] = useState([]);
+  const [totalArr, setTotalArr] = useState([]);
 
-  const podiumArr = finishPosArr.slice(0, 3);
-  const auctionArr = Object.values(auctionObj);
-  const auctionTotal =
-    auctionArr.reduce((total, price) => total + price, 0) * -1;
+  useEffect(() => {
+    setPodiumArr(finishPosArr.slice(0, 3))
+  }, [finishPosArr]);
 
-  const bettingArr = getBettingFormattedArr();
-  const bettingTotal = bettingArr.map((bet) => bet.amount).reduce((total, amount) => total + amount, 0);
+  useEffect(() => {
+    const b = betsArr.map((id, betRound) => {
+      let carPos = podiumArr.indexOf(id);
 
-  function getBettingFormattedArr() {
-    let bettingArr = [];
-      
-    betsArr.forEach((color, index) => {
-      let amount = 0;
-      let posIndex = podiumArr.indexOf(color);
-
-      if (posIndex !== -1) {
-        amount += bettingPrizes[index][posIndex].value;
-      }
-
-      bettingArr.push({
-        color: color,
-        amount: amount
-      });
+      return {
+        id: id,
+        name: id,
+        amount: getBetMoney(betRound, carPos)
+      };
     });
-    return bettingArr;
+
+    const totalBets = b.reduce((acc, curr) => acc + curr.amount, 0);
+
+    setBettingArr(b);
+    setBettingTotal(totalBets);
+  }, [betsArr, bettingPrizes, podiumArr]);
+
+  useEffect(() => {
+    let total = {
+      racing: 0,
+      auction: 0
+    };
+
+    const obj = cars.map((car) => {
+      const auction = auctionObj[car.id] ? auctionObj[car.id] : 0;
+      const selected = auction > 0;
+      total.auction -= auction;
+      
+      const pos = finishPosArr.indexOf(car.id) > -1 ? finishPosArr.indexOf(car.id) : 6;
+      const finished = pos < 6;
+      
+      const racing = pos < 6 ? racingPrizes[pos].value : 0;
+      total.racing += selected ? racing : 0;
+      
+      return {...car, auction: auction, selected: selected, finished: finished,  pos: pos, racing: racing }
+    });
+
+    setTotalArr(obj)
+    setRacingTotal(total.racing)
+    setAuctionTotal(total.auction);
+
+  }, [auctionObj, betsArr, finishPosArr, cars, racingPrizes]);
+
+  function getBetMoney(betRound, carPos) {
+    let money = 0;
+    if (carPos > -1 && carPos < 3) money = bettingPrizes[betRound][carPos].value;
+    return money;
   }
 
   return (
@@ -58,29 +88,22 @@ export default function SlideTotals({
       body={
         <>
           <TotalRacingPayouts
-            racingTitle={racingTitle}
-            racingDesc={racingDesc}
-            cars={cars}
-            finishPosArr={finishPosArr}
-            racingPrizes={racingPrizes}
-            auctionObj={auctionObj}
-            onRacingTotalChange={(amount) => {
-              setRacingTotal(amount);
-            }}
+            title={racingTitle}
+            desc={racingDesc}
+            totalArr={totalArr}
+            total={racingTotal}
           />
           <TotalBettingPayouts
-            bettingTitle={bettingTitle}
-            bettingDesc={bettingDesc}
-            cars={cars}
+            title={bettingTitle}
+            desc={bettingDesc}
             bettingArr={bettingArr}
             total={bettingTotal}
           />
           <TotalAuctionPrices
-            auctionTitle={auctionTitle}
-            auctionDesc={auctionDesc}
-            cars={cars}
-            auctionObj={auctionObj}
-            money={auctionTotal}
+            title={auctionTitle}
+            desc={auctionDesc}
+            totalArr={totalArr}
+            total={auctionTotal}
           />
         </>
       }
