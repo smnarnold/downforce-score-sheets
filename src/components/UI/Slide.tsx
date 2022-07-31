@@ -50,7 +50,13 @@ const StyledSection = styled.section`
   }
 `;
 
-export default function Slide({ header = null, body = null, footer = null }) {
+interface SlideProps {
+  header?: null | React.ReactNode;
+  body?: null | React.ReactNode;
+  footer?: null | React.ReactNode;
+}
+
+export default function Slide({ header, body, footer }: SlideProps) {
   return (
     <StyledSection className="slide">
       {header && <header>{header}</header>}

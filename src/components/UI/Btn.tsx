@@ -45,6 +45,7 @@ const StyledBtn = styled.button`
 interface BtnProps {
   text?: string;
   theme?: string;
+  disabled?: boolean;
   callback: () => void;
 }
 

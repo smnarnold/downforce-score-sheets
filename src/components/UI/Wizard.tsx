@@ -18,11 +18,17 @@ const StyledWizard = styled.main<StyledProps>`
   transition: transform 0.3s;
 `;
 
-export default function Wizard({
+interface WizardProps {
+  slideIndex: number;
+  slidesTotal: number;
+  children: React.ReactNode;
+}
+
+function Wizard({
   slideIndex = 0,
   slidesTotal = 0,
   children = null,
-}) {
+}: WizardProps) {
   const wizardWidth : string = `${slidesTotal * 100}%`;
   const wizardTranslateX : string = `${(slideIndex / slidesTotal) * -100}%`;
 
@@ -36,3 +42,5 @@ export default function Wizard({
     </StyledWizard>
   );
 }
+
+export default Wizard;

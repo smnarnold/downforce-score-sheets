@@ -1,11 +1,23 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import Slide from "../UI/Slide";
 import Instructions from "../UI/Instructions";
 import RadioCar from "../UI/RadioCar";
 import BettingPayouts from "../UI/BettingPayouts";
 import Btn from "../UI/Btn";
 
-export default function SlideBet({
+interface SlideBetProps {
+  slideIndex: number;
+  betIndex: number;
+  instructions: string;
+  cars: any[];
+  bettingTitle: string;
+  bettingPrizes: any[];
+  goToText: string;
+  onSlideChange: (index: number) => void;
+  onBetsChange: (index: number, bet: string) => void;
+};
+
+function SlideBet({
   slideIndex = 0,
   betIndex = 1,
   instructions = "",
@@ -15,8 +27,8 @@ export default function SlideBet({
   goToText = "",
   onSlideChange,
   onBetsChange,
-}) {
-  const [bet, setBet] = useState(null);
+}: SlideBetProps) {
+  const [bet, setBet] = useState<string>('');
   const prizesArr = bettingPrizes[betIndex - 1];
 
   function handleCompleted() {
@@ -55,3 +67,5 @@ export default function SlideBet({
     />
   );
 }
+
+export default SlideBet;

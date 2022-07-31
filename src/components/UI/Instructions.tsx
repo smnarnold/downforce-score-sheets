@@ -6,8 +6,10 @@ const StyledInstructions = styled.p`
   padding: 0 calc(var(--fz) * 2);
 `;
 
-export default function Instructions({ text } : { text: string }) {
-  if (text.trim().length === 0) return;
+function Instructions({ text } : { text: string }) {
+  if (text.trim().length === 0) return <></>;
 
   return <StyledInstructions>{text}</StyledInstructions>;
 }
+
+export default Instructions;

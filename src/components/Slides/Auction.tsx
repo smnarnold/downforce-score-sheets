@@ -1,22 +1,31 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import Slide from "../UI/Slide";
 import Instructions from "../UI/Instructions";
 import AuctionCar from "../UI/RangeCarPrice";
 import Btn from "../UI/Btn";
 
-export default function SlideAuction({
+interface SlideAuctionProps {
+  slideIndex: number;
+  instructions: string;
+  cars: any[];
+  goToText: string;
+  onAuctionChange: (obj: any) => void;
+  onSlideChange: (index: number) => void;
+};
+
+function SlideAuction({
   slideIndex = 0,
   instructions = "",
   cars = [],
   goToText = "",
   onAuctionChange,
   onSlideChange,
-}) {
+}: SlideAuctionProps) {
   const [auctionObj, setAuctionObj] = useState({});
   const btnIsDisabled = Boolean(!Object.keys(auctionObj).length);
 
-  function handleBidChange({ id, price }) {
-    let obj = { ...auctionObj, [id]: price };
+  function handleBidChange({ id, price }: { id: string, price: number }) {
+    let obj = { ...auctionObj, [id]: price } as any;
     if (price === 0) delete obj[id];
 
     setAuctionObj(obj);
@@ -45,3 +54,5 @@ export default function SlideAuction({
     />
   );
 }
+
+export default SlideAuction;

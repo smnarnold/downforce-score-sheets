@@ -1,4 +1,4 @@
-import { ReactElement, useState, useEffect } from "react";
+import { ReactElement, useState } from "react";
 
 import styled from "styled-components";
 
@@ -34,7 +34,8 @@ const StyledSelectCar = styled.label`
   }
 `;
 
-interface SelectCarProps {
+interface SelectCarPositionProps {
+  id: string;
   index: number;
   cars: any[];
   position: string;
@@ -43,14 +44,15 @@ interface SelectCarProps {
   onCarsOrderChange: (index: number, color: string) => void;
 }
 
-function SelectCar({
+function SelectCarPosition({
+  id = "",
   index = 0,
   cars = [],
   position = "",
   defaultOptionText = "",
   carsAvailable = [],
   onCarsOrderChange,
-}: SelectCarProps) {
+}: SelectCarPositionProps) {
   const [carTheme, setCarTheme] = useState("");
   const theme = carTheme.trim().length ? `car-theme-${carTheme}` : "";
   const optionsArr: ReactElement[] = [
@@ -82,4 +84,4 @@ function SelectCar({
   );
 }
 
-export default SelectCar;
+export default SelectCarPosition;

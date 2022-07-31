@@ -4,7 +4,18 @@ import SelectCarPosition from "../UI/SelectCarPosition";
 import Instructions from "../UI/Instructions";
 import Btn from "../UI/Btn";
 
-export default function SlideFinishLine({
+interface SlideFinishLineProps {
+  slideIndex: number;
+  instructions: string;
+  cars: any[];
+  racingPrizes: any[];
+  goToText: string;
+  noCarSelected: string;
+  onFinishPosChange: (carsArr: string[]) => void;
+  onSlideChange: (index: number) => void;
+}
+
+function SlideFinishLine({
   slideIndex = 0,
   instructions = "",
   cars = [],
@@ -13,7 +24,7 @@ export default function SlideFinishLine({
   noCarSelected = "No car",
   onFinishPosChange,
   onSlideChange,
-}) {
+}: SlideFinishLineProps) {
   const [carsPosArr, setCarsPosArr] = useState(new Array(6));
   const [carsNotRankedArr, setCarsNotRankedArr] = useState(cars);
 
@@ -22,7 +33,7 @@ export default function SlideFinishLine({
     setCarsNotRankedArr(carsNotRanked);
   }, [cars, carsPosArr]);
 
-  function handleCarsOrderChange(index, id) {
+  function handleCarsOrderChange(index: number, id: string) {
     let temp = [...carsPosArr];
     temp[index] = id;
     setCarsPosArr(temp);
@@ -42,7 +53,6 @@ export default function SlideFinishLine({
         position={racingPrizes[index].label}
         index={index}
         defaultOptionText={noCarSelected}
-        carsPosArr={carsPosArr}
         carsAvailable={carsNotRankedArr}
         onCarsOrderChange={handleCarsOrderChange}
       />
@@ -63,3 +73,5 @@ export default function SlideFinishLine({
     />
   );
 }
+
+export default SlideFinishLine;
