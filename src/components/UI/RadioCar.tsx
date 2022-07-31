@@ -1,15 +1,21 @@
 import { useState, useEffect } from "react";
+import { getCarTheme } from "../helpers";
 import styled from "styled-components";
 
 const StyledRadioCar = styled.label`
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   width: 100%;
-  min-height: var(--stripe-height);
-  padding: calc(var(--fz) * 0.5);
-  opacity: 0.65;
+
+  .wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: var(--stripe-height);
+    padding: calc(var(--fz) * 0.5);
+  }
 
   input {
     position: absolute;
@@ -41,7 +47,7 @@ function RadioCar({
   onBetChange,
 }: RadioCarProps) {
   const [checked, setChecked] = useState(currentBet === id);
-  const theme = id.trim().length ? `car-theme-${id}` : "";
+  const theme = getCarTheme(id);
 
   useEffect(() => {
     setChecked(currentBet === id);
@@ -53,15 +59,17 @@ function RadioCar({
   }
 
   return (
-    <StyledRadioCar key={id} className={`${checked && "is-checked"} ${theme}`}>
-      <input
-        type="radio"
-        name={`bet-${index}`}
-        value={id}
-        onChange={handleToggleRadio}
-      />
+    <StyledRadioCar key={id} className={`${checked && "is-active"} ${theme}`}>
+      <div className="wrapper">
+        <input
+          type="radio"
+          name={`bet-${index}`}
+          value={id}
+          onChange={handleToggleRadio}
+        />
 
-      {name}
+        {name}
+      </div>
     </StyledRadioCar>
   );
 }

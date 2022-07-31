@@ -1,4 +1,4 @@
-import formatMoney from '../../helpers/formatMoney';
+import { formatMoney } from '../helpers';
 import styled from "styled-components";
 
 const StyledBettingPayouts = styled.div`
@@ -33,6 +33,11 @@ const StyledBettingPayouts = styled.div`
     display: flex;
     width: 100%;
     text-align: center;
+  }
+
+  td {
+    border: solid 1px var(--grey-light);
+    border-collapse: collapse;
   }
 
   .pos {

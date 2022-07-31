@@ -1,28 +1,34 @@
 import { ReactElement, useState } from "react";
-
+import { getCarTheme } from "../helpers";
 import styled from "styled-components";
 
 const StyledSelectCar = styled.label`
   position: relative;
-  display: flex;
   width: 100%;
+  margin: 0;
   font-style: italic;
   font-weight: bold;
   text-align: center;
-  min-height: var(--stripe-height);
-  margin: 0;
-  padding: 0.5em calc(var(--fz) * 2);
+  text-transform: uppercase;
 
-  &:not([class*="theme"]):nth-child(odd) {
+  .wrapper {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: var(--stripe-height);
+    padding: 0.5em calc(var(--fz) * 2);
+  }
+
+  &:not([class*="car-theme"]):nth-child(odd) {
     background-color: rgba(0, 0, 0, 0.05);
   }
 
   > span {
-    flex: 0 0 15%;
+    flex: 0 0 auto;
   }
 
   select {
-    flex: 0 0 85%;
+    flex: 1 1 auto;
     background-color: transparent;
     color: currentColor;
     font-size: 1em;
@@ -35,7 +41,6 @@ const StyledSelectCar = styled.label`
 `;
 
 interface SelectCarPositionProps {
-  id: string;
   index: number;
   cars: any[];
   position: string;
@@ -45,7 +50,6 @@ interface SelectCarPositionProps {
 }
 
 function SelectCarPosition({
-  id = "",
   index = 0,
   cars = [],
   position = "",
@@ -54,7 +58,7 @@ function SelectCarPosition({
   onCarsOrderChange,
 }: SelectCarPositionProps) {
   const [carTheme, setCarTheme] = useState("");
-  const theme = carTheme.trim().length ? `car-theme-${carTheme}` : "";
+  const theme = getCarTheme(carTheme);
   const optionsArr: ReactElement[] = [
     <option key="default" value="">{defaultOptionText}</option>,
   ];
@@ -75,11 +79,13 @@ function SelectCarPosition({
   }
 
   return (
-    <StyledSelectCar className={theme}>
-      {position && <span>{position}</span>}
-      <select onChange={(event) => handleChangeCar(event.target.value)}>
-        {optionsArr}
-      </select>
+    <StyledSelectCar className={`${theme} is-active`}>
+      <div className="wrapper">
+        {position && <span>{position}</span>}
+        <select onChange={(event) => handleChangeCar(event.target.value)}>
+          {optionsArr}
+        </select>
+      </div>
     </StyledSelectCar>
   );
 }

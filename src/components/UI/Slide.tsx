@@ -45,8 +45,12 @@ const StyledSection = styled.section`
   > footer {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     background-color: var(--grey-light);
+    padding-left: calc(var(--fz) * 2);
+    padding-right: calc(var(--fz) * 2);
+
+    > *:only-child { margin: 0 auto; }
   }
 `;
 

@@ -42,11 +42,17 @@ const StyledGauge = styled.div`
         left: 0;
         width: 1.75em;
         height: 1.75em;
-        background-color: var(--black);
+        background-color: #ccc;
         color: #fff;
+        font-style: normal;
         border-radius: 50%;
         transform: translate(-50%, -50%);
         pointer-events: none;
+        transition: background-color 0.15s ease-in-out;
+
+        .is-active & {
+          background-color: var(--black);
+        }
     }
 `;
 

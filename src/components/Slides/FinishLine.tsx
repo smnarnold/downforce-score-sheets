@@ -47,7 +47,6 @@ function SlideFinishLine({
   const carsSelectArr = cars.map((car, index) => {
     return (
       <SelectCarPosition
-        id={car.id}
         key={car.id}
         cars={cars}
         position={racingPrizes[index].label}

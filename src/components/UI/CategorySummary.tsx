@@ -17,6 +17,7 @@ const StyledCategorySummary = styled.div`
   .table {
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
   }
 
@@ -50,9 +51,11 @@ function CategorySummary({
     const arr: ReactElement[] = categoryArr.map((car) => {
       return (
         <CarSummary
-          key={car.id}
+          key={car.key}
           id={car.id}
           name={car.name}
+          pos={car.pos}
+          finished={car.finished}
           money={car.amount}
           active={car.active}
         />

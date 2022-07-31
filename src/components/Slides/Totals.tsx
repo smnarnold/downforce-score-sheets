@@ -9,10 +9,13 @@ function getRacingArr(arr: any) {
 
   return sortedArr
     .sort((a, b) => a.pos - b.pos)
-    .map((car) => {
+    .map((car, index) => {
       return {
+        key: car.id,
         id: car.id,
         name: car.name,
+        pos: index + 1,
+        finished: car.finished,
         amount: car.racing,
         active: car.selected,
       };
@@ -22,15 +25,15 @@ function getRacingArr(arr: any) {
 function getAuctionArr(arr: any) {
   let res = [...arr];
 
-  return res
-    .map((car) => {
-      return {
-        id: car.id,
-        name: car.name,
-        amount: car.auction,
-        active: car.selected,
-      };
-    })
+  return res.map((car) => {
+    return {
+      key: car.id,
+      id: car.id,
+      name: car.name,
+      amount: car.auction,
+      active: car.selected,
+    };
+  });
 }
 
 interface SlideTotalsProps {
@@ -67,37 +70,34 @@ export default function SlideTotals({
   restart,
 }: SlideTotalsProps) {
   const [podiumArr, setPodiumArr] = useState<string[]>([]);
-
   const [racingArr, setRacingArr] = useState<any[]>([]);
   const [racingTotal, setRacingTotal] = useState<number>(0);
-  
   const [bettingTotal, setBettingTotal] = useState<number>(0);
   const [bettingArr, setBettingArr] = useState<any[]>([]);
-
   const [auctionArr, setAuctionArr] = useState<any[]>([]);
   const [auctionTotal, setAuctionTotal] = useState<number>(0);
 
   useEffect(() => {
-    const temp = [...finishPosArr];
-    setPodiumArr(temp.slice(0, 3));
+    setPodiumArr(finishPosArr.slice(0, 3));
   }, [finishPosArr]);
 
   useEffect(() => {
-    const getBetMoney = function(betRound: number, carPos: number) {
+    const getBetMoney = function (betRound: number, carPos: number) {
       let money = 0;
       if (carPos > -1 && carPos < 3)
         money = bettingPrizes[betRound][carPos].value;
       return money;
-    }
+    };
 
     const b = betsArr.map((id, betRound) => {
       let carPos = podiumArr.indexOf(id);
 
       return {
+        key: `bet-${betRound + 1}`,
         id: id,
         name: id,
         amount: getBetMoney(betRound, carPos),
-        active: true
+        active: true,
       };
     });
 
@@ -143,7 +143,7 @@ export default function SlideTotals({
 
   return (
     <Slide
-      body = {
+      body={
         <>
           <CategorySummary
             title={racingTitle}

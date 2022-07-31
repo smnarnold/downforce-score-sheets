@@ -1,32 +1,6 @@
-:root {
-  --fz: 3.6vw;
-  --border-small: 2px;
-  --border: 4px;
+@use "styles/_vars";
+@use "styles/car-themes";
 
-  --stripe-height: 45px;
-
-  /* Colors */
-  --grey-light: rgba(0,0,0,.05);
-  --grey: rgba(0,0,0,.1);
-  --grey-dark: rgba(0,0,0,.15);
-  --black: #25201d;
-  --blue-light: #39d5f9;
-  --blue-medium: #00adee;
-  --red-light: rgb(220 53 69 / 50%);
-  --red: #d32832;
-  --red-dark: #BE242D;
-  --yellow-light: rgb(255 193 7 / 50%);
-  --yellow: #ffc107;
-  --yellow-dark: #e0a800;
-
-  /* Theme colors */
-  --theme-black: #3e3e3e;
-  --theme-blue: #2f9fcf;
-  --theme-green: #3ca748;
-  --theme-orange: #eb8c2f;
-  --theme-red: #dd1f29;
-  --theme-yellow: #e6db43;
-}
 
 @media (min-width: 500px) {
   :root {
@@ -36,38 +10,6 @@
 
 * {
   box-sizing: border-box;
-}
-
-.car-theme {
-  &-black {
-    background-color: var(--theme-black);
-    color: white;
-  }
-
-  &-blue {
-    background-color: var(--theme-blue);
-    color: var(--black);
-  }
-
-  &-green {
-    background-color: var(--theme-green);
-    color: var(--black);
-  }
-
-  &-orange {
-    background-color: var(--theme-orange);
-    color: var(--black);
-  }
-
-  &-red {
-    background-color: var(--theme-red);
-    color: var(--black);
-  }
-
-  &-yellow {
-    background-color: var(--theme-yellow);
-    color: var(--black);
-  }
 }
 
 html,
