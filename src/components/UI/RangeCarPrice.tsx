@@ -4,6 +4,7 @@ import Gauge from "./Gauge";
 import styled from "styled-components";
 
 const StyledAuctionCar = styled.div`
+  flex: 1 1 auto;  
   position: relative;
   width: 100%;
   margin: 0;
@@ -13,12 +14,13 @@ const StyledAuctionCar = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
+    height: 100%;
     min-height: var(--stripe-height);
-    padding: 0 calc(var(--fz) * 2) 0 0;
+    padding: 0 var(--spacer) 0 0;
   }
 
   .checkbox {
-    margin-right: var(--fz);
+    margin-right: var(--spacer);
     cursor: pointer;
   }
 
@@ -27,7 +29,7 @@ const StyledAuctionCar = styled.div`
     align-items: center;
     flex: 0 0 40%;
     cursor: pointer;
-    padding-left: calc(var(--fz) * 2);
+    padding-left: var(--spacer);
   }
 
   .name {
@@ -35,7 +37,7 @@ const StyledAuctionCar = styled.div`
 
     flex-grow: 1;
     text-align: center;
-    padding: calc(var(--fz) * 0.5);
+    padding: 0 var(--spacer);
   }
 `;
 

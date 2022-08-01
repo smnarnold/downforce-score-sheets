@@ -10,7 +10,7 @@ const StyledMainHeader = styled.header`
     display: block;
     position: relative;
     width: 100%;
-    padding: 0 calc(var(--fz) * 2);
+    padding: 0 var(--spacer);
   }
 
   img {
@@ -23,9 +23,9 @@ const StyledMainHeader = styled.header`
     justify-content: space-between;
     background-color: var(--blue-light);
     color: #fff;
-    height: 30px;
-    padding: 0 calc(var(--fz) * 2);
-    margin-top: var(--fz);
+    height: 40px;
+    padding: 0 var(--spacer);
+    margin-top: var(--spacer);
   }
 
   .title {

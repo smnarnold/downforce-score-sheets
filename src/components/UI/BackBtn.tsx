@@ -15,12 +15,6 @@ const StyledBackBtn = styled.button`
   transition: background-color 0.15s ease-in-out;
   cursor: pointer;
 
-  > span {
-    position: relative;
-    top: 50%;
-    transform: translateY(-45%);
-  }
-
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }

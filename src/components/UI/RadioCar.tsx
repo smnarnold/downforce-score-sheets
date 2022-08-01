@@ -14,13 +14,13 @@ const StyledRadioCar = styled.label`
     justify-content: center;
     width: 100%;
     min-height: var(--stripe-height);
-    padding: calc(var(--fz) * 0.5);
+    padding:  0 var(--spacer);
   }
 
   input {
     position: absolute;
     top: 50%;
-    left: calc(var(--fz) * 2);
+    left: var(--spacer);
     transform: translateY(-50%);
     margin: 0;
   }

@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledInstructions = styled.p`
   font-style: italic;
   text-align: center;
-  padding: 0 calc(var(--fz) * 2);
+  padding: 0 var(--spacer);
 `;
 
 function Instructions({ text } : { text: string }) {

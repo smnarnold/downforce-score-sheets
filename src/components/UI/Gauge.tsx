@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const StyledGauge = styled.div`
     position: relative;
-    flex: 0 0 calc(60% - var(--fz));
-    margin-left: var(--fz);
+    flex: 0 0 calc(60% - var(--spacer));
+    margin-left: var(--spacer);
     background: linear-gradient(
         to right,
         transparent 2%,
@@ -30,7 +30,7 @@ const StyledGauge = styled.div`
     input {
         display: block;
         width: 100%;
-        height: 1.75em;
+        height: 30px;
     }
 
     output {
@@ -40,8 +40,8 @@ const StyledGauge = styled.div`
         position: absolute;
         top: 50%;
         left: 0;
-        width: 1.75em;
-        height: 1.75em;
+        width: 30px;
+        height: 30px;
         background-color: #ccc;
         color: #fff;
         font-style: normal;
@@ -95,7 +95,7 @@ function Gauge({
         value={value}
         disabled={disabled}
       />
-      <output style={{ left: `${thumbPos}%` }}>{value}</output>
+      <output style={{ left: `calc(${thumbPos}% + (${8 - thumbPos * 0.15}px))` }}>{value}</output>
     </StyledGauge>
   );
 }

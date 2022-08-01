@@ -47,8 +47,8 @@ const StyledSection = styled.section`
     align-items: center;
     justify-content: space-between;
     background-color: var(--grey-light);
-    padding-left: calc(var(--fz) * 2);
-    padding-right: calc(var(--fz) * 2);
+    padding-left: var(--spacer);
+    padding-right: var(--spacer);
 
     > *:only-child { margin: 0 auto; }
   }

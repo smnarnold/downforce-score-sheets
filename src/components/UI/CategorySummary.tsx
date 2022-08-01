@@ -10,7 +10,7 @@ const StyledCategorySummary = styled.div`
   .title {
     @extend %styledText;
 
-    padding: 0.25em calc(var(--fz) * 2);
+    padding: 0.25em var(--spacer);
     margin: 0;
   }
 
@@ -28,7 +28,7 @@ const StyledCategorySummary = styled.div`
     font-size: 0.75em;
     font-style: italic;
     text-transform: uppercase;
-    padding: 0.25em calc(var(--fz) * 2);
+    padding: 0.25em var(--spacer);
   }
 `;
 

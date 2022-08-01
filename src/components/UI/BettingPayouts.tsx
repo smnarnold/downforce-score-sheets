@@ -13,24 +13,21 @@ const StyledBettingPayouts = styled.div`
     justify-content: center;
     align-items: center;
     flex: 0 0 50%;
-    padding: 0 calc(var(--fz) * 2);
+    padding: var(--spacer);
     margin: 0;
   }
 
   table {
-    display: block;
     position: relative;
     width: 100%;
   }
 
   tbody {
-    display: block;
     position: relative;
     width: 100%;
   }
 
   tr {
-    display: flex;
     width: 100%;
     text-align: center;
   }
