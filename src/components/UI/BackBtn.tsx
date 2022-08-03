@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import AppContext from "../../store/app-context";
 import styled from "styled-components";
 
 const StyledBackBtn = styled.button`
@@ -22,9 +24,14 @@ const StyledBackBtn = styled.button`
 
 interface BackBtnProps {
   text?: string;
-  goToPrevSlide: () => void;
 }
 
-export default function Btn({ text = "↩", goToPrevSlide }: BackBtnProps) {
-  return <StyledBackBtn onClick={goToPrevSlide}><span>{text}</span></StyledBackBtn>;
+export default function Btn({ text = "↩" }: BackBtnProps) {
+  const ctx = useContext(AppContext);
+
+  return (
+    <StyledBackBtn onClick={ctx.onPrevSlide}>
+      <span>{text}</span>
+    </StyledBackBtn>
+  );
 }

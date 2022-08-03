@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import AppContext from '../../store/app-context';
 import styled from "styled-components";
 
 interface StyledProps {
@@ -19,18 +21,17 @@ const StyledWizard = styled.main<StyledProps>`
 `;
 
 interface WizardProps {
-  slideIndex: number;
   slidesTotal: number;
   children: React.ReactNode;
 }
 
 function Wizard({
-  slideIndex = 0,
   slidesTotal = 0,
   children = null,
 }: WizardProps) {
+  const ctx = useContext(AppContext);
   const wizardWidth : string = `${slidesTotal * 100}%`;
-  const wizardTranslateX : string = `${(slideIndex / slidesTotal) * -100}%`;
+  const wizardTranslateX : string = `${(ctx.slideIndex / slidesTotal) * -100}%`;
 
   return (
     <StyledWizard

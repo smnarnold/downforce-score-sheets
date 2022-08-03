@@ -6,19 +6,17 @@ import BettingPayouts from "../UI/BettingPayouts";
 import Btn from "../UI/Btn";
 
 interface SlideBetProps {
-  slideIndex: number;
   betIndex: number;
   instructions: string;
   cars: any[];
   bettingTitle: string;
   bettingPrizes: any[];
   goToText: string;
-  onSlideChange: (index: number) => void;
+  onSlideChange: () => void;
   onBetsChange: (index: number, bet: string) => void;
 };
 
 function SlideBet({
-  slideIndex = 0,
   betIndex = 1,
   instructions = "",
   cars = [],
@@ -33,7 +31,7 @@ function SlideBet({
 
   function handleCompleted() {
     onBetsChange(betIndex - 1, bet);
-    onSlideChange(slideIndex + 1)
+    onSlideChange()
   };
 
   const carItems = cars.map((car) => {

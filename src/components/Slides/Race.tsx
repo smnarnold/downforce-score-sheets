@@ -3,14 +3,12 @@ import Instructions from "../UI/Instructions";
 import Btn from "../UI/Btn";
 
 interface SlideRaceProps {
-  slideIndex: number;
   instructions: string;
   goToText: string;
-  onSlideChange: (index: number) => void;
+  onSlideChange: () => void;
 }
 
 export default function SlideRace({
-  slideIndex = 0,
   instructions = "",
   goToText = "",
   onSlideChange,
@@ -24,7 +22,7 @@ export default function SlideRace({
           <Btn
             text={goToText}
             theme="yellow"
-            callback={() => onSlideChange(slideIndex + 1)}
+            callback={() => onSlideChange()}
           />
         </>
       }

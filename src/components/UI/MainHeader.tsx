@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import AppContext from '../../store/app-context';
 import BackBtn from "./BackBtn";
 import logo from "../../images/downforce-logo.webp";
 import styled from "styled-components";
@@ -50,16 +52,14 @@ const StyledMainHeader = styled.header`
 `;
 
 interface MainHeaderProps {
-  slideIndex: number;
   slideTitle: string;
-  onSlideChange: (index: number) => void;
 }
 
 function MainHeader({
-  slideIndex = 0,
   slideTitle = "",
-  onSlideChange,
 }: MainHeaderProps) {
+  const ctx = useContext(AppContext);
+
   return (
     <StyledMainHeader>
       <picture>
@@ -67,11 +67,9 @@ function MainHeader({
       </picture>
 
       <nav>
-        {slideIndex > 0 && (
-          <BackBtn goToPrevSlide={() => onSlideChange(slideIndex - 1)} />
-        )}
+        {ctx.slideIndex > 0 && <BackBtn />}
         {slideTitle && <h2 className="title">{slideTitle}</h2>}
-        {slideIndex > 0 && <div className="spacer" />}
+        {ctx.slideIndex > 0 && <div className="spacer" />}
       </nav>
     </StyledMainHeader>
   );

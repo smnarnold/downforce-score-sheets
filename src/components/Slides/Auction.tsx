@@ -5,16 +5,14 @@ import AuctionCar from "../UI/RangeCarPrice";
 import Btn from "../UI/Btn";
 
 interface SlideAuctionProps {
-  slideIndex: number;
-  instructions: string;
+  instructions?: string;
   cars: any[];
   goToText: string;
   onAuctionChange: (obj: any) => void;
-  onSlideChange: (index: number) => void;
+  onSlideChange: () => void;
 };
 
 function SlideAuction({
-  slideIndex = 0,
   instructions = "",
   cars = [],
   goToText = "",
@@ -33,7 +31,7 @@ function SlideAuction({
 
   function handleCompleted() {
     onAuctionChange(auctionObj);
-    onSlideChange(slideIndex + 1);
+    onSlideChange();
   }
   
   const carItems = cars.map((car) => {

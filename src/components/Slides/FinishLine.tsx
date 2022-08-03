@@ -5,18 +5,16 @@ import Instructions from "../UI/Instructions";
 import Btn from "../UI/Btn";
 
 interface SlideFinishLineProps {
-  slideIndex: number;
   instructions: string;
   cars: any[];
   racingPrizes: any[];
   goToText: string;
   noCarSelected: string;
   onFinishPosChange: (carsArr: string[]) => void;
-  onSlideChange: (index: number) => void;
+  onSlideChange: () => void;
 }
 
 function SlideFinishLine({
-  slideIndex = 0,
   instructions = "",
   cars = [],
   racingPrizes = [],
@@ -41,7 +39,7 @@ function SlideFinishLine({
 
   function handleCompleted() {
     onFinishPosChange(carsPosArr);
-    onSlideChange(slideIndex + 1)
+    onSlideChange()
   }
 
   const carsSelectArr = cars.map((car, index) => {

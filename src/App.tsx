@@ -1,4 +1,4 @@
-import { ReactElement, useState, useEffect } from "react";
+import { ReactElement, useState, useEffect, useContext } from "react";
 import data from "./data/downforce.json";
 import "./App.scss";
 
@@ -9,9 +9,11 @@ import SlideFinishLine from "./components/Slides/FinishLine";
 import SlideTotals from "./components/Slides/Totals";
 import MainHeader from "./components/UI/MainHeader";
 import Wizard from "./components/UI/Wizard";
+import AppContext from "./store/app-context";
 
 function App() {
-  const [slideIndex, setSlideIndex] = useState<number>(data.initial.slideIndex);
+  const ctx = useContext(AppContext);
+
   const [auctionObj, setAuctionObj] = useState<any>(data.initial.auctionObj);
   const [betsArr, setBetsArr] = useState<string[]>(data.initial.betsArr);
   const [finishPosArr, setFinishPosArr] = useState<string[]>(
@@ -27,12 +29,11 @@ function App() {
             return (
               <SlideAuction
                 key={`slide-${index}`}
-                slideIndex={index}
                 instructions={slide.instructions}
                 cars={data.cars}
                 goToText={slide.goToText}
                 onAuctionChange={(obj) => setAuctionObj(obj)}
-                onSlideChange={(index) => setSlideIndex(index)}
+                onSlideChange={ctx.onNextSlide}
               />
             );
           case "race":
@@ -40,8 +41,7 @@ function App() {
               <SlideRace
                 {...slide}
                 key={`slide-${index}`}
-                slideIndex={index}
-                onSlideChange={(index) => setSlideIndex(index)}
+                onSlideChange={ctx.onNextSlide}
               />
             );
           case "bet":
@@ -49,12 +49,11 @@ function App() {
               <SlideBet
                 {...slide}
                 key={`slide-${index}`}
-                slideIndex={index}
                 cars={data.cars}
                 bettingTitle={data.slides[8].bettingTitle}
                 bettingPrizes={data.bettingPrizes}
                 onBetsChange={handleBetChange}
-                onSlideChange={(index) => setSlideIndex(index)}
+                onSlideChange={ctx.onNextSlide}
               />
             );
           case "finishline":
@@ -62,11 +61,10 @@ function App() {
               <SlideFinishLine
                 {...slide}
                 key={`slide-${index}`}
-                slideIndex={index}
                 cars={data.cars}
                 racingPrizes={data.racingPrizes}
                 onFinishPosChange={handleFinishPosChange}
-                onSlideChange={(index) => setSlideIndex(index)}
+                onSlideChange={ctx.onNextSlide}
               />
             );
           case "totals":
@@ -74,7 +72,6 @@ function App() {
               <SlideTotals
                 {...slide}
                 key={`slide-${index}`}
-                slideIndex={index}
                 auctionObj={auctionObj}
                 betsArr={betsArr}
                 cars={data.cars}
@@ -96,10 +93,10 @@ function App() {
       tmp[betIndex] = id;
       setBetsArr(tmp);
     }
-  }, [auctionObj, betsArr, finishPosArr, slideIndex]);
+  }, [auctionObj, betsArr, finishPosArr]);
 
   function restart() {
-    setSlideIndex(data.initial.slideIndex);
+    ctx.onGoToSlide(0); 
     setAuctionObj(data.initial.auctionObj);
     setBetsArr(data.initial.betsArr);
     setFinishPosArr(data.initial.finishPosArr);
@@ -111,13 +108,9 @@ function App() {
 
   return (
     <div className="App">
-      <MainHeader
-        slideIndex={slideIndex}
-        slideTitle={data.slides[slideIndex].title}
-        onSlideChange={(prev) => setSlideIndex(prev)}
-      />
+      <MainHeader slideTitle="allo"/>
 
-      <Wizard slideIndex={slideIndex} slidesTotal={data.slides.length}>
+      <Wizard slidesTotal={data.slides.length}>
         {slides}
       </Wizard>
     </div>
