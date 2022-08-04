@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import AppContext from '../../store/app-context';
+import { useSelector } from 'react-redux';
+import { wizardSlideIndex } from './Wizard/wizardSlice';
 import BackBtn from "./BackBtn";
 import logo from "../../images/downforce-logo.webp";
 import styled from "styled-components";
@@ -58,7 +58,7 @@ interface MainHeaderProps {
 function MainHeader({
   slideTitle = "",
 }: MainHeaderProps) {
-  const ctx = useContext(AppContext);
+  const slideIndex = useSelector(wizardSlideIndex);
 
   return (
     <StyledMainHeader>
@@ -67,9 +67,9 @@ function MainHeader({
       </picture>
 
       <nav>
-        {ctx.slideIndex > 0 && <BackBtn />}
+        {slideIndex > 0 && <BackBtn />}
         {slideTitle && <h2 className="title">{slideTitle}</h2>}
-        {ctx.slideIndex > 0 && <div className="spacer" />}
+        {slideIndex > 0 && <div className="spacer" />}
       </nav>
     </StyledMainHeader>
   );

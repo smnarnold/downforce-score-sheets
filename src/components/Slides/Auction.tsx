@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { nextSlide } from '../UI/Wizard/wizardSlice';
 import Slide from "../UI/Slide";
 import Instructions from "../UI/Instructions";
 import AuctionCar from "../UI/RangeCarPrice";
@@ -7,18 +9,17 @@ import Btn from "../UI/Btn";
 interface SlideAuctionProps {
   instructions?: string;
   cars: any[];
-  goToText: string;
+  btnText?: string;
   onAuctionChange: (obj: any) => void;
-  onSlideChange: () => void;
 };
 
 function SlideAuction({
   instructions = "",
   cars = [],
-  goToText = "",
+  btnText = "",
   onAuctionChange,
-  onSlideChange,
 }: SlideAuctionProps) {
+  const dispatch = useDispatch();
   const [auctionObj, setAuctionObj] = useState({});
   const btnIsDisabled = Boolean(!Object.keys(auctionObj).length);
 
@@ -31,7 +32,7 @@ function SlideAuction({
 
   function handleCompleted() {
     onAuctionChange(auctionObj);
-    onSlideChange();
+    dispatch(nextSlide());
   }
   
   const carItems = cars.map((car) => {
@@ -44,7 +45,7 @@ function SlideAuction({
       body={carItems}
       footer={
         <Btn
-          text={goToText}
+          text={btnText}
           disabled={btnIsDisabled}
           callback={handleCompleted}
         />

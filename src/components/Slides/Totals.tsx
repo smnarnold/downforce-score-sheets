@@ -169,7 +169,7 @@ export default function SlideTotals({
         <>
           <h3>{totalTitle}</h3>
           <MoneyTag amount={racingTotal + bettingTotal + auctionTotal} />
-          <Btn text="Restart" disabled={false} callback={restart} />
+          <Btn text="Restart" callback={restart} />
         </>
       }
     />

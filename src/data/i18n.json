@@ -1,0 +1,28 @@
+{
+  "en": {
+    "letsRace": "Let's race",
+    "auctionInstructions": "Select the Car(s) you won and money you spent in the auction.",
+    "race1Instructions": "After a player's turn cause at least one car to pass the FIRST yellow bid line, tap the 1st BET button.",
+    "race1Btn": "1st BET",
+    "race2Instructions": "After a player's turn cause at least one car to pass the SECOND yellow bid line, tap the 2nd BET button.",
+    "race2Btn": "2nd BET",
+    "race3Instructions": "After a player's turn cause at least one car to pass the THIRD yellow bid line, tap the 3rd BET button.",
+    "race3Btn": "3rd BET",
+    "betInstructions": "Which car will win the race?",
+    "finishlineInstructions": "Select the finish order.",
+    "finishlineBtn": "Get Totals"
+  },
+  "fr": {
+    "letsRace": "Faisons la course",
+    "auctionInstructions": "Sélectionnez les voitures gagnées et l'argent dépensé dans l'enchère.",
+    "race1Instructions": "Lorsque le tour d'un joueur permettant à au moins une voiture de dépasser la PREMIÈRE ligne de mise jaune est complété, appuyez sur le bouton 1re MISE.",
+    "race1Btn": "1re MISE",
+    "race2Instructions": "Lorsque le tour d'un joueur permettant à au moins une voiture de dépasser la DEUXIÈME ligne de mise jaune est complété, appuyez sur le bouton 2e MISE.",
+    "race2Btn": "2e MISE",
+    "race3Instructions": "Lorsque le tour d'un joueur permettant à au moins une voiture de dépasser la TROISIÈME ligne de mise jaune est complété, appuyez sur le bouton 3e MISE.",
+    "race3Btn": "3e MISE",
+    "betInstructions": "Quelle voiture gagnera la course?",
+    "finishlineInstructions": "Sélectionnez l'ordre de fin.",
+    "finishlineBtn": "Voir les totaux"
+  }
+}

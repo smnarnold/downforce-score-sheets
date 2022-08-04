@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { nextSlide } from '../UI/Wizard/wizardSlice';
 import Slide from "../UI/Slide";
 import Instructions from "../UI/Instructions";
 import RadioCar from "../UI/RadioCar";
@@ -9,10 +11,8 @@ interface SlideBetProps {
   betIndex: number;
   instructions: string;
   cars: any[];
-  bettingTitle: string;
   bettingPrizes: any[];
-  goToText: string;
-  onSlideChange: () => void;
+  btnText: string;
   onBetsChange: (index: number, bet: string) => void;
 };
 
@@ -20,18 +20,17 @@ function SlideBet({
   betIndex = 1,
   instructions = "",
   cars = [],
-  bettingTitle = "",
   bettingPrizes = [],
-  goToText = "",
-  onSlideChange,
+  btnText = "",
   onBetsChange,
 }: SlideBetProps) {
+  const dispatch = useDispatch();
   const [bet, setBet] = useState<string>('');
   const prizesArr = bettingPrizes[betIndex - 1];
 
   function handleCompleted() {
     onBetsChange(betIndex - 1, bet);
-    onSlideChange()
+    dispatch(nextSlide());
   };
 
   const carItems = cars.map((car) => {
@@ -52,12 +51,12 @@ function SlideBet({
       body={
         <>
           {carItems}
-          <BettingPayouts arr={prizesArr} title={bettingTitle} />
+          <BettingPayouts arr={prizesArr} title={'test'} />
         </>
       }
       footer={
         <Btn
-          text={goToText}
+          text={btnText}
           callback={handleCompleted}
           disabled={bet === null}
         />

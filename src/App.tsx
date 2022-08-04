@@ -1,4 +1,6 @@
-import { ReactElement, useState, useEffect, useContext } from "react";
+import { ReactElement, useState, useEffect, useContext, } from "react";
+import { useDispatch } from 'react-redux';
+import { goToSlide } from './components/UI/Wizard/wizardSlice';
 import data from "./data/downforce.json";
 import "./App.scss";
 
@@ -8,12 +10,12 @@ import SlideBet from "./components/Slides/Bet";
 import SlideFinishLine from "./components/Slides/FinishLine";
 import SlideTotals from "./components/Slides/Totals";
 import MainHeader from "./components/UI/MainHeader";
-import Wizard from "./components/UI/Wizard";
-import AppContext from "./store/app-context";
+import Wizard from "./components/UI/Wizard/Wizard";
+import LangContext from "./store/i18n-context";
 
 function App() {
-  const ctx = useContext(AppContext);
-
+  const langCtx = useContext(LangContext);
+  const dispatch = useDispatch();
   const [auctionObj, setAuctionObj] = useState<any>(data.initial.auctionObj);
   const [betsArr, setBetsArr] = useState<string[]>(data.initial.betsArr);
   const [finishPosArr, setFinishPosArr] = useState<string[]>(
@@ -24,54 +26,62 @@ function App() {
   useEffect(() => {
     const slidesTmp: ReactElement[] = data.slides.map(
       (slide: any, index: number) => {
+        const key = `slide-${index}`;
+        const slideInstructions = langCtx.get(`${slide.id}Instructions`) ? langCtx.get(`${slide.id}Instructions`) : '';
+        let slideBtn = langCtx.get(`${slide.id}Btn`) ? langCtx.get(`${slide.id}Btn`) : '';
+
         switch (slide.type) {
           case "auction":
+            slideBtn = langCtx.get("letsRace");
+
             return (
               <SlideAuction
-                key={`slide-${index}`}
-                instructions={slide.instructions}
+                key={key}
+                instructions={slideInstructions}
                 cars={data.cars}
-                goToText={slide.goToText}
+                btnText={slideBtn}
                 onAuctionChange={(obj) => setAuctionObj(obj)}
-                onSlideChange={ctx.onNextSlide}
               />
             );
           case "race":
             return (
               <SlideRace
-                {...slide}
-                key={`slide-${index}`}
-                onSlideChange={ctx.onNextSlide}
+                key={key}
+                instructions={slideInstructions}
+                btnText={slideBtn}
               />
             );
           case "bet":
+            slideBtn = langCtx.get("letsRace");
+
             return (
               <SlideBet
                 {...slide}
-                key={`slide-${index}`}
+                key={key}
+                instructions={slideInstructions}
                 cars={data.cars}
-                bettingTitle={data.slides[8].bettingTitle}
                 bettingPrizes={data.bettingPrizes}
                 onBetsChange={handleBetChange}
-                onSlideChange={ctx.onNextSlide}
+                btnText={slideBtn}
               />
             );
           case "finishline":
             return (
               <SlideFinishLine
                 {...slide}
-                key={`slide-${index}`}
+                key={key}
+                instructions={slideInstructions}
                 cars={data.cars}
                 racingPrizes={data.racingPrizes}
                 onFinishPosChange={handleFinishPosChange}
-                onSlideChange={ctx.onNextSlide}
+                btnText={slideBtn}
               />
             );
           case "totals":
             return (
               <SlideTotals
                 {...slide}
-                key={`slide-${index}`}
+                key={key}
                 auctionObj={auctionObj}
                 betsArr={betsArr}
                 cars={data.cars}
@@ -93,10 +103,10 @@ function App() {
       tmp[betIndex] = id;
       setBetsArr(tmp);
     }
-  }, [auctionObj, betsArr, finishPosArr]);
+  }, [auctionObj, betsArr, finishPosArr, langCtx]);
 
   function restart() {
-    ctx.onGoToSlide(0); 
+    dispatch(goToSlide(0));
     setAuctionObj(data.initial.auctionObj);
     setBetsArr(data.initial.betsArr);
     setFinishPosArr(data.initial.finishPosArr);
@@ -108,7 +118,11 @@ function App() {
 
   return (
     <div className="App">
-      <MainHeader slideTitle="allo"/>
+      <select onChange={(event) => langCtx.onToggleLang(event.target.value)}>
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+      </select>
+      <MainHeader slideTitle='allo'/>
 
       <Wizard slidesTotal={data.slides.length}>
         {slides}

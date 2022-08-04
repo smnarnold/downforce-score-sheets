@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from 'react-redux';
+import { nextSlide } from '../UI/Wizard/wizardSlice';
 import Slide from "../UI/Slide";
 import SelectCarPosition from "../UI/SelectCarPosition";
 import Instructions from "../UI/Instructions";
@@ -8,21 +10,20 @@ interface SlideFinishLineProps {
   instructions: string;
   cars: any[];
   racingPrizes: any[];
-  goToText: string;
   noCarSelected: string;
+  btnText: string;
   onFinishPosChange: (carsArr: string[]) => void;
-  onSlideChange: () => void;
 }
 
 function SlideFinishLine({
   instructions = "",
   cars = [],
   racingPrizes = [],
-  goToText = "",
   noCarSelected = "No car",
+  btnText = "",
   onFinishPosChange,
-  onSlideChange,
 }: SlideFinishLineProps) {
+  const dispatch = useDispatch();
   const [carsPosArr, setCarsPosArr] = useState(new Array(6));
   const [carsNotRankedArr, setCarsNotRankedArr] = useState(cars);
 
@@ -39,7 +40,7 @@ function SlideFinishLine({
 
   function handleCompleted() {
     onFinishPosChange(carsPosArr);
-    onSlideChange()
+    dispatch(nextSlide());
   }
 
   const carsSelectArr = cars.map((car, index) => {
@@ -62,7 +63,7 @@ function SlideFinishLine({
       body={carsSelectArr}
       footer={
         <Btn
-          text={goToText}
+          text={btnText}
           disabled={!carsPosArr[0]}
           callback={handleCompleted}
         />

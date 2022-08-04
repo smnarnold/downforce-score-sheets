@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import AppContext from '../../store/app-context';
+import { useSelector } from 'react-redux';
+import { wizardSlideIndex } from './wizardSlice';
 import styled from "styled-components";
 
 interface StyledProps {
@@ -25,13 +25,13 @@ interface WizardProps {
   children: React.ReactNode;
 }
 
-function Wizard({
+export default function Wizard({
   slidesTotal = 0,
   children = null,
 }: WizardProps) {
-  const ctx = useContext(AppContext);
+  const slideIndex = useSelector(wizardSlideIndex);
   const wizardWidth : string = `${slidesTotal * 100}%`;
-  const wizardTranslateX : string = `${(ctx.slideIndex / slidesTotal) * -100}%`;
+  const wizardTranslateX : string = `${slideIndex / slidesTotal * -100}%`;
 
   return (
     <StyledWizard
@@ -43,5 +43,3 @@ function Wizard({
     </StyledWizard>
   );
 }
-
-export default Wizard;

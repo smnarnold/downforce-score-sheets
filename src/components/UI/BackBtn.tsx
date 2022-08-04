@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import AppContext from "../../store/app-context";
+import { useDispatch } from 'react-redux';
+import { prevSlide } from './Wizard/wizardSlice';
 import styled from "styled-components";
 
 const StyledBackBtn = styled.button`
@@ -27,10 +27,10 @@ interface BackBtnProps {
 }
 
 export default function Btn({ text = "↩" }: BackBtnProps) {
-  const ctx = useContext(AppContext);
+  const dispatch = useDispatch();
 
   return (
-    <StyledBackBtn onClick={ctx.onPrevSlide}>
+    <StyledBackBtn onClick={() => dispatch(prevSlide())}>
       <span>{text}</span>
     </StyledBackBtn>
   );

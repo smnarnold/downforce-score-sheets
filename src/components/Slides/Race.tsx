@@ -1,28 +1,29 @@
+import { useDispatch } from 'react-redux';
+import { nextSlide } from '../UI/Wizard/wizardSlice';
 import Slide from "../UI/Slide";
 import Instructions from "../UI/Instructions";
 import Btn from "../UI/Btn";
 
 interface SlideRaceProps {
-  instructions: string;
-  goToText: string;
-  onSlideChange: () => void;
+  instructions?: string;
+  btnText?: string;
 }
 
 export default function SlideRace({
   instructions = "",
-  goToText = "",
-  onSlideChange,
+  btnText = "",
 }: SlideRaceProps) {
-  
+  const dispatch = useDispatch();
+
   return (
     <Slide
       body={
         <>
           <Instructions text={instructions} />
           <Btn
-            text={goToText}
+            text={btnText}
             theme="yellow"
-            callback={() => onSlideChange()}
+            callback={() => dispatch(nextSlide())}
           />
         </>
       }
