@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from 'react-redux';
 import { getCarTheme } from "../helpers";
 import styled from "styled-components";
+import { updateBets } from "../Slides/Bets/betsSlice";
 
 const StyledRadioCar = styled.label`
   position: relative;
@@ -36,7 +38,6 @@ interface RadioCarProps {
   name: string;
   index: number;
   currentBet: string;
-  onBetChange: (id: string) => void;
 }
 
 function RadioCar({
@@ -44,8 +45,8 @@ function RadioCar({
   name = "", // ex: "Red"
   index = 0, // ex: 0 for the 1st bet
   currentBet,
-  onBetChange,
 }: RadioCarProps) {
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState(currentBet === id);
   const theme = getCarTheme(id);
 
@@ -55,7 +56,7 @@ function RadioCar({
 
   function handleToggleRadio() {
     setChecked((c) => !c);
-    onBetChange(id);
+    dispatch( updateBets({index: index, car: id}) );
   }
 
   return (
