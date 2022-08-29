@@ -23,15 +23,17 @@ export const LangContextProvider = (props: any) => {
 
   useEffect(() => {
     const storedLang: string | null = localStorage.getItem("lang");
-    if (storedLang) {
-      setLang(storedLang);
-      setDictionary(i18n[storedLang as keyof typeof i18n]);
-    }
+    if (storedLang && storedLang !== "en") updateLang(storedLang); // Not default language
   }, []);
 
-  const toggleLangHandler = (language: string) => {
+  const updateLang = (language: string) => {
     setLang(language);
     setDictionary(i18n[language as keyof typeof i18n]);
+    document.documentElement.lang = language;
+  };
+
+  const toggleLangHandler = (language: string) => {
+    updateLang(language);
     localStorage.setItem("lang", language);
   };
 

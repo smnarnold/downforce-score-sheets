@@ -10,7 +10,14 @@
     "race3Btn": "3rd BET",
     "betInstructions": "Which car will win the race?",
     "finishlineInstructions": "Select the finish order.",
-    "finishlineBtn": "Get Totals"
+    "finishlineBtn": "Get Totals",
+    "position1": "1st",
+    "position2": "2nd",
+    "position3": "3rd",
+    "position4": "4th",
+    "position5": "5th",
+    "position6": "6th",
+    "noCar": "No Car"
   },
   "fr": {
     "letsRace": "Faisons la course",
@@ -23,6 +30,13 @@
     "race3Btn": "3e MISE",
     "betInstructions": "Quelle voiture gagnera la course?",
     "finishlineInstructions": "Sélectionnez l'ordre de fin.",
-    "finishlineBtn": "Voir les totaux"
+    "finishlineBtn": "Voir les totaux",
+    "position1": "1re",
+    "position2": "2e",
+    "position3": "3e",
+    "position4": "4e",
+    "position5": "5e",
+    "position6": "6e",
+    "noCar": "Aucune voiture"
   }
 }

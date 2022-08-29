@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import LangContext from "../../store/i18n-context";
 
 const StyledLangSelect = styled.select`
   font-style: italic;
@@ -7,11 +9,17 @@ const StyledLangSelect = styled.select`
 `;
 
 function LangSelect() {
-    return (
-        <StyledLangSelect>
-            test
-        </StyledLangSelect>
-    )
+  const langCtx = useContext(LangContext);
+
+  return (
+    <StyledLangSelect
+      value={langCtx.lang}
+      onChange={(e) => langCtx.onToggleLang(e.target.value)}
+    >
+      <option value={"en"}>English</option>
+      <option value={"fr"}>Français</option>
+    </StyledLangSelect>
+  );
 }
 
-export default LangSelect
+export default LangSelect;

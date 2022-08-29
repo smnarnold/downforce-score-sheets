@@ -4,25 +4,26 @@ import { goToSlide } from './components/UI/Wizard/wizardSlice';
 import data from "./data/downforce.json";
 import "./App.scss";
 
-import SlideAuction from "./components/Slides/Auction";
+import SlideAuction from "./components/Slides/Auction/Auction";
 import SlideRace from "./components/Slides/Race";
-import SlideBet from "./components/Slides/Bet";
-import SlideFinishLine from "./components/Slides/FinishLine";
+import SlideBet from "./components/Slides/Bets/Bets";
+import SlideFinishLine from "./components/Slides/FinishLine/FinishLine";
 import SlideTotals from "./components/Slides/Totals";
 import MainHeader from "./components/UI/MainHeader";
+import LangSelect from "./components/UI/LangSelect";
 import Wizard from "./components/UI/Wizard/Wizard";
 import LangContext from "./store/i18n-context";
 
 function App() {
+  // console.log('Render APP')
   const langCtx = useContext(LangContext);
   const dispatch = useDispatch();
   const [auctionObj, setAuctionObj] = useState<any>(data.initial.auctionObj);
-  const [betsArr, setBetsArr] = useState<string[]>(data.initial.betsArr);
   const [finishPosArr, setFinishPosArr] = useState<string[]>(
     data.initial.finishPosArr
   );
   const [slides, setSlides] = useState<ReactElement[]>([]);
-
+  
   useEffect(() => {
     const slidesTmp: ReactElement[] = data.slides.map(
       (slide: any, index: number) => {
@@ -40,7 +41,6 @@ function App() {
                 instructions={slideInstructions}
                 cars={data.cars}
                 btnText={slideBtn}
-                onAuctionChange={(obj) => setAuctionObj(obj)}
               />
             );
           case "race":
@@ -61,7 +61,6 @@ function App() {
                 instructions={slideInstructions}
                 cars={data.cars}
                 bettingPrizes={data.bettingPrizes}
-                onBetsChange={handleBetChange}
                 btnText={slideBtn}
               />
             );
@@ -72,43 +71,34 @@ function App() {
                 key={key}
                 instructions={slideInstructions}
                 cars={data.cars}
-                racingPrizes={data.racingPrizes}
-                onFinishPosChange={handleFinishPosChange}
                 btnText={slideBtn}
               />
             );
-          case "totals":
-            return (
-              <SlideTotals
-                {...slide}
-                key={key}
-                auctionObj={auctionObj}
-                betsArr={betsArr}
-                cars={data.cars}
-                finishPosArr={finishPosArr}
-                racingPrizes={data.racingPrizes}
-                bettingPrizes={data.bettingPrizes}
-                restart={restart}
-              />
-            );
+          // case "totals":
+          //   return (
+          //     <SlideTotals
+          //       {...slide}
+          //       key={key}
+          //       auctionObj={auctionObj}
+          //       betsArr={betsArr}
+          //       cars={data.cars}
+          //       finishPosArr={finishPosArr}
+          //       racingPrizes={data.racingPrizes}
+          //       bettingPrizes={data.bettingPrizes}
+          //       restart={restart}
+          //     />
+          //   );
           default:
             return <></>;
         }
       }
     );
     setSlides(slidesTmp);
-
-    function handleBetChange(betIndex: number, id: string) {
-      const tmp = [...betsArr];
-      tmp[betIndex] = id;
-      setBetsArr(tmp);
-    }
-  }, [auctionObj, betsArr, finishPosArr, langCtx]);
+  }, [auctionObj, finishPosArr, langCtx]);
 
   function restart() {
     dispatch(goToSlide(0));
     setAuctionObj(data.initial.auctionObj);
-    setBetsArr(data.initial.betsArr);
     setFinishPosArr(data.initial.finishPosArr);
   }
 
@@ -118,10 +108,8 @@ function App() {
 
   return (
     <div className="App">
-      <select onChange={(event) => langCtx.onToggleLang(event.target.value)}>
-        <option value="en">English</option>
-        <option value="fr">Français</option>
-      </select>
+      <LangSelect />
+
       <MainHeader slideTitle='allo'/>
 
       <Wizard slidesTotal={data.slides.length}>

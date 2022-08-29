@@ -31,75 +31,11 @@
       "name": "Yellow"
     }
   ],
-  "racingPrizes": [
-    {
-      "label": "1st",
-      "value": 12
-    },
-    {
-      "label": "2nd",
-      "value": 9
-    },
-    {
-      "label": "3rd",
-      "value": 6
-    },
-    {
-      "label": "4th",
-      "value": 4
-    },
-    {
-      "label": "5th",
-      "value": 2
-    },
-    {
-      "label": "6th",
-      "value": 0
-    }
-  ],
+  "racingPrizes": [12, 9, 6, 4, 2, 0],
   "bettingPrizes": [
-    [
-      {
-        "label": "1st",
-        "value": 9
-      },
-      {
-        "label": "2nd",
-        "value": 6
-      },
-      {
-        "label": "3nd",
-        "value": 3
-      }
-    ],
-    [
-      {
-        "label": "1st",
-        "value": 6
-      },
-      {
-        "label": "2nd",
-        "value": 4
-      },
-      {
-        "label": "3nd",
-        "value": 2
-      }
-    ],
-    [
-      {
-        "label": "1st",
-        "value": 3
-      },
-      {
-        "label": "2nd",
-        "value": 2
-      },
-      {
-        "label": "3nd",
-        "value": 1
-      }
-    ]
+    [9,6,3],
+    [6,4,2],
+    [3,2,1]
   ],
   "slides": [
     {
@@ -115,7 +51,7 @@
     {
       "id": "bet1",
       "type": "bet",
-      "betIndex": 1,
+      "betIndex": 0,
       "title": "1st Betting round"
     },
     {
@@ -126,7 +62,7 @@
     {
       "id": "bet2",
       "type": "bet",
-      "betIndex": 2,
+      "betIndex": 1,
       "title": "2nd Betting round"
     },
     {
@@ -137,7 +73,7 @@
     {
       "id": "bet3",
       "type": "bet",
-      "betIndex": 3,
+      "betIndex": 2,
       "title": "3rd Betting round"
     },
     {

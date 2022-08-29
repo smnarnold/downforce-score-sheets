@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from 'react-redux';
 import { getCarTheme } from "../helpers";
 import Gauge from "./Gauge";
 import styled from "styled-components";
+import { updateAuction } from "../Slides/Auction/auctionSlice";
 
 const StyledAuctionCar = styled.div`
   flex: 1 1 auto;  
@@ -44,28 +46,27 @@ const StyledAuctionCar = styled.div`
 interface AuctionCarProps {
   id: string;
   name: string;
-  initialValue: number;
-  onBidChange: any;
+  initialValue?: number;
 }
 
 export default function AuctionCar({
   id = "",
   name = "",
   initialValue = 0,
-  onBidChange,
 }: AuctionCarProps) {
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   const [price, setPrice] = useState(initialValue);
   const theme = getCarTheme(id);
 
   useEffect(() => {
-    /* Wait half a second without the user chnging the price before calling onBidChange */
+    /* Wait that the user stop changing the price before calling onBidChange */
     const timer = setTimeout(() => {
-      onBidChange({ price, id });
+      dispatch( updateAuction({car: id, price}) );
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [price, id, onBidChange]);
+  }, [price, id]);
 
   function handlePriceChange(val: number) {
     setPrice(val);

@@ -1,6 +1,9 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { getCarTheme } from "../helpers";
 import styled from "styled-components";
+import LangContext from '../../store/i18n-context';
+import { finishLineArr, updateFinishLine } from "../Slides/FinishLine/finishLineSlice";
 
 const StyledSelectCar = styled.label`
   flex: 1 1 auto;
@@ -15,7 +18,7 @@ const StyledSelectCar = styled.label`
   .wrapper {
     position: relative;
     display: flex;
-    aign-items: center;
+    align-items: center;
     width: 100%;
     height: 100%;
     min-height: var(--stripe-height);
@@ -51,45 +54,40 @@ const StyledSelectCar = styled.label`
 interface SelectCarPositionProps {
   index: number;
   cars: any[];
-  position: string;
-  defaultOptionText: string;
-  carsAvailable: string[];
-  onCarsOrderChange: (index: number, color: string) => void;
 }
 
 function SelectCarPosition({
   index = 0,
   cars = [],
-  position = "",
-  defaultOptionText = "",
-  carsAvailable = [],
-  onCarsOrderChange,
 }: SelectCarPositionProps) {
+  const dispatch = useDispatch();
+  const langCtx = useContext(LangContext);
+  const finishLine = useSelector(finishLineArr);
+  const carsNotRanked = cars.filter(car => !finishLine.includes(car.id))
+  
   const [carTheme, setCarTheme] = useState("");
   const theme = getCarTheme(carTheme);
   const optionsArr: ReactElement[] = [
-    <option key="default" value="">{defaultOptionText}</option>,
+    <option key="default" value="">{langCtx.get('noCar')}</option>,
   ];
 
-  cars.forEach((car) => {
-    if (carsAvailable.includes(car.id) || carTheme === car.id) {
-      optionsArr?.push(
-        <option key={car.id} value={car.id}>
-          {car?.name}
-        </option>
-      );
-    }
+  carsNotRanked.forEach((car) => {
+    optionsArr?.push(
+      <option key={car.id} value={car.id}>
+        {car?.name}
+      </option>
+    );
   });
 
   function handleChangeCar(id: string) {
     setCarTheme(id);
-    onCarsOrderChange(index, id);
+    dispatch( updateFinishLine({index: index, car: id}) );
   }
 
   return (
     <StyledSelectCar className={`${theme} is-active`}>
       <div className="wrapper">
-        {position && <span className="position">{position}</span>}
+        <span className="position">{langCtx.get(`position${index + 1}`)}</span>
         <select onChange={(event) => handleChangeCar(event.target.value)}>
           {optionsArr}
         </select>

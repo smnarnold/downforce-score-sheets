@@ -68,7 +68,6 @@ function CarSummary({
   const isActive = active ? "is-active" : "";
   const showDidntFinished = pos > 0 && !finished;
   const showPos = finished && pos;
-  console.log(name, money)
 
   return (
     <StyledCarSummary

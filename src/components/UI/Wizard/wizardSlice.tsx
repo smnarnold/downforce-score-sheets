@@ -6,14 +6,13 @@ export const wizardSlice = createSlice({
       index: 0,
     },
     reducers: {
-      prevSlide: (state) => {
+      prevSlide: (state: { index: number; }) => {
         state.index -= 1
       },
-      nextSlide: (state) => {
-        console.log('next')
+      nextSlide: (state: { index: number; }) => {
         state.index += 1
       },
-      goToSlide: (state, action) => {
+      goToSlide: (state: { index: number; }, action: { payload: number; }) => {
         state.index = action.payload
       },
     },

@@ -1,5 +1,7 @@
 import { formatMoney } from '../helpers';
 import styled from "styled-components";
+import { useContext } from 'react';
+import LangContext from '../../store/i18n-context';
 
 const StyledBettingPayouts = styled.div`
   position: relative;
@@ -52,17 +54,13 @@ interface BettingPayoutsProps {
   title: string;
 }
 
-interface PayoutObj {
-  label: string;
-  value: number;
-}
-
 function BettingPayouts({ arr = [], title = "" }: BettingPayoutsProps) {
-  const rows = arr.map((payout: PayoutObj) => {
+  const langCtx = useContext(LangContext);
+  const rows = arr.map((value: number, index: number) => {
     return (
-      <tr key={payout.label}>
-        <td className="pos">{payout.label}</td>
-        <td className="price">{formatMoney(payout.value)}</td>
+      <tr key="titre">
+        <td className="pos">{langCtx.get(`position${index + 1}`)}</td>
+        <td className="price">{formatMoney(value)}</td>
       </tr>
     );
   });
