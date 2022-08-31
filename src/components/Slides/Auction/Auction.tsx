@@ -4,22 +4,22 @@ import { ICar } from '../../../Interfaces';
 import { nextSlide } from '../../UI/Wizard/wizardSlice';
 import Slide from "../../UI/Slide";
 import Instructions from "../../UI/Instructions";
-import AuctionCar from "../../UI/RangeCarPrice";
+import RangeCarPrice from "../../UI/RangeCarPrice";
 import Btn from "../../UI/Btn";
+import { useContext } from 'react';
+import LangContext from '../../../store/i18n-context';
 
 interface SlideAuctionProps {
   instructions?: string;
   cars: any[];
-  btnText?: string;
 };
 
 function SlideAuction({
   instructions = "",
   cars = [],
-  btnText = "",
 }: SlideAuctionProps) {
-  // console.log('render auction')
   const dispatch = useDispatch();
+  const langCtx = useContext(LangContext);
   const auction = useSelector(auctionObj);
   const auctionArr = Object.values(auction)
   const auctionTotal = auctionArr.length ? auctionArr.reduce((a, b) => a + b) : 0;
@@ -28,7 +28,7 @@ function SlideAuction({
   const handleCompleted = () => dispatch(nextSlide());
   
   const carItems = cars.map((car: ICar) => {
-    return <AuctionCar {...car} key={car.id} />;
+    return <RangeCarPrice {...car} key={car.id} id={car.id} />;
   });
 
   return (
@@ -37,7 +37,7 @@ function SlideAuction({
       body={carItems}
       footer={
         <Btn
-          text={btnText}
+          text={langCtx.get("letsRace")}
           disabled={btnIsDisabled}
           callback={handleCompleted}
         />

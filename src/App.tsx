@@ -1,4 +1,4 @@
-import { ReactElement, useState, useEffect, useContext, } from "react";
+import { ReactElement, useState, useEffect, useContext, useMemo, } from "react";
 import { useDispatch } from 'react-redux';
 import { goToSlide } from './components/UI/Wizard/wizardSlice';
 import data from "./data/downforce.json";
@@ -18,14 +18,15 @@ function App() {
   // console.log('Render APP')
   const langCtx = useContext(LangContext);
   const dispatch = useDispatch();
+  const cars = ['black', 'blue', 'green', 'orange', 'red', 'yellow'];
   const [auctionObj, setAuctionObj] = useState<any>(data.initial.auctionObj);
   const [finishPosArr, setFinishPosArr] = useState<string[]>(
     data.initial.finishPosArr
   );
-  const [slides, setSlides] = useState<ReactElement[]>([]);
+  const [slides, setSlides] = useState<(ReactElement|null)[]>([]);
   
-  useEffect(() => {
-    const slidesTmp: ReactElement[] = data.slides.map(
+  useMemo(() => {
+    const slidesTmp: (ReactElement|null)[] = data.slides.map(
       (slide: any, index: number) => {
         const key = `slide-${index}`;
         const slideInstructions = langCtx.get(`${slide.id}Instructions`) ? langCtx.get(`${slide.id}Instructions`) : '';
@@ -33,14 +34,11 @@ function App() {
 
         switch (slide.type) {
           case "auction":
-            slideBtn = langCtx.get("letsRace");
-
             return (
               <SlideAuction
                 key={key}
                 instructions={slideInstructions}
                 cars={data.cars}
-                btnText={slideBtn}
               />
             );
           case "race":
@@ -52,49 +50,39 @@ function App() {
               />
             );
           case "bet":
-            slideBtn = langCtx.get("letsRace");
-
             return (
               <SlideBet
-                {...slide}
                 key={key}
-                instructions={slideInstructions}
                 cars={data.cars}
                 bettingPrizes={data.bettingPrizes}
-                btnText={slideBtn}
+                betIndex={slide.betIndex}
               />
             );
           case "finishline":
             return (
               <SlideFinishLine
-                {...slide}
                 key={key}
-                instructions={slideInstructions}
                 cars={data.cars}
-                btnText={slideBtn}
               />
             );
-          // case "totals":
-          //   return (
-          //     <SlideTotals
-          //       {...slide}
-          //       key={key}
-          //       auctionObj={auctionObj}
-          //       betsArr={betsArr}
-          //       cars={data.cars}
-          //       finishPosArr={finishPosArr}
-          //       racingPrizes={data.racingPrizes}
-          //       bettingPrizes={data.bettingPrizes}
-          //       restart={restart}
-          //     />
-          //   );
+          case "totals":
+            return (
+              <SlideTotals
+                {...slide}
+                key={key}
+                cars={data.cars}
+                racingPrizes={data.racingPrizes}
+                bettingPrizes={data.bettingPrizes}
+                restart={restart}
+              />
+            );
           default:
-            return <></>;
+            return null;
         }
       }
     );
     setSlides(slidesTmp);
-  }, [auctionObj, finishPosArr, langCtx]);
+  }, [langCtx]);
 
   function restart() {
     dispatch(goToSlide(0));

@@ -4,15 +4,20 @@ import { IAuctionItem, IAuctionObj } from './IAuction';
 export const auctionSlice = createSlice({
     name: 'auction',
     initialState: {
-      obj: {},
-    },
+      black: 0,
+      blue: 0,
+      green: 0,
+      orange: 0,
+      red: 0,
+      yellow: 0
+    } as IAuctionObj,
     reducers: {
-      updateAuction: (state: { obj: IAuctionObj; }, action: { payload: IAuctionItem }) => {
-        state.obj = { ...state.obj, [action.payload.car]: action.payload.price };
+      updateAuction: (state, action: { payload: IAuctionItem }) => {
+        return { ...state, [action.payload.car]: action.payload.price };
       }
     },
   })
   
   export const { updateAuction } = auctionSlice.actions;
-  export const auctionObj = (state: { auction: { obj: IAuctionObj; }; }) => state.auction.obj;
+  export const auctionObj = (state: { auction: IAuctionObj }) => state.auction;
   export default auctionSlice.reducer;

@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useState, useEffect, useContext } from "react";
+import { useDispatch } from "react-redux";
 import { getCarTheme } from "../helpers";
 import Gauge from "./Gauge";
 import styled from "styled-components";
 import { updateAuction } from "../Slides/Auction/auctionSlice";
+import LangContext from "../../store/i18n-context";
 
 const StyledAuctionCar = styled.div`
   flex: 1 1 auto;  
@@ -45,16 +46,16 @@ const StyledAuctionCar = styled.div`
 
 interface AuctionCarProps {
   id: string;
-  name: string;
   initialValue?: number;
 }
 
 export default function AuctionCar({
   id = "",
-  name = "",
   initialValue = 0,
 }: AuctionCarProps) {
   const dispatch = useDispatch();
+  const langCtx = useContext(LangContext);
+  const name = langCtx.get(`carMarioKart[${id}]`);
   const [checked, setChecked] = useState(false);
   const [price, setPrice] = useState(initialValue);
   const theme = getCarTheme(id);

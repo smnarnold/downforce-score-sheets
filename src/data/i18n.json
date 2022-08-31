@@ -1,5 +1,21 @@
 {
   "en": {
+    "carRegular": {
+      "black": "Black",
+      "blue": "Blue",
+      "green": "Green",
+      "orange": "Orange",
+      "red": "Red",
+      "yellow": "Black"
+    },
+    "carMarioKart": {
+      "black": "Shyguy",
+      "blue": "Toad",
+      "green": "Luigi",
+      "orange": "Donkey Kong",
+      "red": "Mario",
+      "yellow": "Bowser"
+    },
     "letsRace": "Let's race",
     "auctionInstructions": "Select the Car(s) you won and money you spent in the auction.",
     "race1Instructions": "After a player's turn cause at least one car to pass the FIRST yellow bid line, tap the 1st BET button.",
@@ -17,11 +33,34 @@
     "position4": "4th",
     "position5": "5th",
     "position6": "6th",
-    "noCar": "No Car"
+    "noCar": "No Car",
+    "totalWinning": "Total winning",
+    "auctionPrice": "Auction price",
+    "auctionTotal": "Auction total",
+    "bettingTotal": "Betting total",
+    "bettingPayouts": "Betting payouts",
+    "racingTotal": "Racing total",
+    "racingPayouts": "Racing payouts"
   },
   "fr": {
+    "carRegular": {
+      "black": "Noire",
+      "blue": "Bleue",
+      "green": "Verte",
+      "orange": "Orange",
+      "red": "Rouge",
+      "yellow": "Jaune"
+    },
+    "carMarioKart": {
+      "black": "Shyguy",
+      "blue": "Toad",
+      "green": "Luigi",
+      "orange": "Donkey Kong",
+      "red": "Mario",
+      "yellow": "Bowser"
+    },
     "letsRace": "Faisons la course",
-    "auctionInstructions": "Sélectionnez les voitures gagnées et l'argent dépensé dans l'enchère.",
+    "auctionInstructions": "Sélectionnez les voitures gagnées à l'enchère ainsi que leurs coûts.",
     "race1Instructions": "Lorsque le tour d'un joueur permettant à au moins une voiture de dépasser la PREMIÈRE ligne de mise jaune est complété, appuyez sur le bouton 1re MISE.",
     "race1Btn": "1re MISE",
     "race2Instructions": "Lorsque le tour d'un joueur permettant à au moins une voiture de dépasser la DEUXIÈME ligne de mise jaune est complété, appuyez sur le bouton 2e MISE.",
@@ -37,6 +76,13 @@
     "position4": "4e",
     "position5": "5e",
     "position6": "6e",
-    "noCar": "Aucune voiture"
+    "noCar": "Aucune voiture",
+    "totalWinning": "Gain totaux",
+    "auctionPrice": "Auction price",
+    "auctionTotal": "Auction total",
+    "bettingTotal": "Betting total",
+    "bettingPayouts": "Betting payouts",
+    "racingTotal": "Racing total",
+    "racingPayouts": "Racing payouts"
   }
 }

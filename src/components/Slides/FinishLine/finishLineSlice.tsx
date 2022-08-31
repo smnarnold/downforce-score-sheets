@@ -3,18 +3,16 @@ import { IFinishLineItem } from './IFinishLine';
 
 export const finishLineSlice = createSlice({
   name: 'finishLine',
-  initialState: {
-    arr: [null, null, null, null, null, null],
-  },
+  initialState: [null, null, null, null, null, null] as (null|string)[],
   reducers: {
-      updateFinishLine: (state: { arr: (string | null)[]; }, action: { payload: IFinishLineItem }) => {
-          const tmp = [...state.arr];
-          tmp[action.payload.index] = action.payload.car;
-          state.arr = tmp;
-      }
+    updateFinishLine: (state, action: { payload: IFinishLineItem }) => {
+        const tmp = [...state];
+        tmp[action.payload.index] = action.payload.car;
+        return tmp;
+    }
   },
 })
 
 export const { updateFinishLine } = finishLineSlice.actions;
-export const finishLineArr = (state: { finishLine: { arr: (string|null)[] } } ):(string|null)[] => state.finishLine.arr;
+export const finishLineArr = (state: { finishLine: (string|null)[] } ) => state.finishLine;
 export default finishLineSlice.reducer;

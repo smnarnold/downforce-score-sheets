@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useContext } from 'react';
 import LangContext from '../../store/i18n-context';
 
-const StyledBettingPayouts = styled.div`
+const StyledBettingPayouts = styled.figcaption`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -58,7 +58,7 @@ function BettingPayouts({ arr = [], title = "" }: BettingPayoutsProps) {
   const langCtx = useContext(LangContext);
   const rows = arr.map((value: number, index: number) => {
     return (
-      <tr key="titre">
+      <tr key={value}>
         <td className="pos">{langCtx.get(`position${index + 1}`)}</td>
         <td className="price">{formatMoney(value)}</td>
       </tr>

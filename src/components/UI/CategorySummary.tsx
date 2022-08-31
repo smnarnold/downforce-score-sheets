@@ -1,4 +1,4 @@
-import { ReactElement, useState, useEffect } from "react";
+import { ReactElement, useState, useEffect, useMemo } from "react";
 import CarSummary from "./CarSummary";
 import MoneyTag from "./MoneyTag";
 import styled from "styled-components";
@@ -47,7 +47,7 @@ function CategorySummary({
 }: CategorySummaryProps) {
   const [summaryArr, setSummaryArr] = useState<ReactElement[]>([]);
 
-  useEffect(() => {
+  useMemo(() => {
     const arr: ReactElement[] = categoryArr.map((car) => {
       return (
         <CarSummary

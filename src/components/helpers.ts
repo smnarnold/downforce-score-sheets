@@ -9,5 +9,5 @@ export function formatMoney(initialAmount: number) {
 }
 
 export function getCarTheme(id: string) {
-  return id.trim().length ? `car-theme car-theme--${id}` : "";
+  return id?.trim().length ? `car-theme car-theme--${id}` : "";
 }

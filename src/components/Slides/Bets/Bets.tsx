@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import styled from "styled-components";
 import { ISlideBetProps } from './IBets';
 import { nextSlide } from '../../UI/Wizard/wizardSlice';
 import Slide from "../../UI/Slide";
@@ -7,15 +8,30 @@ import RadioCar from "../../UI/RadioCar";
 import BettingPayouts from "../../UI/BettingPayouts";
 import Btn from "../../UI/Btn";
 import { betsArr } from './betsSlice';
+import { useContext } from 'react';
+import LangContext from '../../../store/i18n-context';
+
+const StyledBets = styled.figure`
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  .betting-options {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+`;
 
 function SlideBet({
   betIndex = 1,
-  instructions = "",
   cars = [],
   bettingPrizes = [],
-  btnText = "",
 }: ISlideBetProps) {
   const dispatch = useDispatch();
+  const langCtx = useContext(LangContext);
   const bets = useSelector(betsArr);
   const prizesArr = bettingPrizes[betIndex];
   const actualBet = bets[betIndex];
@@ -26,8 +42,8 @@ function SlideBet({
   const carItems = cars.map((car) => {
     return (
       <RadioCar
-        {...car}
         key={car.id}
+        id={car.id}
         index={betIndex}
         currentBet={actualBet}
       />
@@ -36,16 +52,18 @@ function SlideBet({
 
   return (
     <Slide
-      header={<Instructions text={instructions} />}
+      header={<Instructions text={langCtx.get("betInstructions")} />}
       body={
-        <>
-          {carItems}
+        <StyledBets>
+          <div className="betting-options">
+            {carItems}
+          </div>
           <BettingPayouts arr={prizesArr} title={'test'} />
-        </>
+        </StyledBets>
       }
       footer={
         <Btn
-          text={btnText}
+          text={langCtx.get("letsRace")}
           callback={handleCompleted}
           disabled={btnIsDisabled}
         />

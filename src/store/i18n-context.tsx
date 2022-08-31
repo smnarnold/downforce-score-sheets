@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import i18n from "../data/i18n.json";
-
+import _get from 'lodash/get';
 interface LangContextProps {
   lang: string;
   i18n: any;
@@ -38,7 +38,8 @@ export const LangContextProvider = (props: any) => {
   };
 
   const getTranslationHandler = (key: string): string => {
-    return dictionary[key as keyof typeof dictionary];
+    return _get(dictionary, key);
+    //return dictionary[key as keyof typeof dictionary];
   };
 
   return (

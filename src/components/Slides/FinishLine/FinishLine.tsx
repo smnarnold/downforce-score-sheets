@@ -5,19 +5,18 @@ import SelectCarPosition from "../../UI/SelectCarPosition";
 import Instructions from "../../UI/Instructions";
 import Btn from "../../UI/Btn";
 import { finishLineArr } from "./finishLineSlice";
+import { useContext } from 'react';
+import LangContext from '../../../store/i18n-context';
 
 interface SlideFinishLineProps {
-  instructions: string;
   cars: any[];
-  btnText: string;
 }
 
 function SlideFinishLine({
-  instructions = "",
   cars = [],
-  btnText = "",
 }: SlideFinishLineProps) {
   const dispatch = useDispatch();
+  const langCtx = useContext(LangContext);
   const finishLine = useSelector(finishLineArr);
   const firstPos = finishLine[0];
   const btnIsDisabled = firstPos === null;
@@ -36,11 +35,11 @@ function SlideFinishLine({
 
   return (
     <Slide
-      header={<Instructions text={instructions} />}
+      header={<Instructions text={langCtx.get("finishlineInstructions")} />}
       body={carsSelectArr}
       footer={
         <Btn
-          text={btnText}
+          text={langCtx.get("finishlineBtn")}
           disabled={btnIsDisabled}
           callback={handleCompleted}
         />

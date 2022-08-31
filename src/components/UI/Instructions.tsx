@@ -7,7 +7,7 @@ const StyledInstructions = styled.p`
 `;
 
 function Instructions({ text } : { text: string }) {
-  if (text.trim().length === 0) return <></>;
+  if (text?.trim().length === 0) return null;
 
   return <StyledInstructions>{text}</StyledInstructions>;
 }

@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useDispatch } from 'react-redux';
 import { getCarTheme } from "../helpers";
 import styled from "styled-components";
 import { updateBets } from "../Slides/Bets/betsSlice";
+import LangContext from "../../store/i18n-context";
 
 const StyledRadioCar = styled.label`
+  flex: 1 1 auto;
   position: relative;
-  display: block;
+  display: flex;
   width: 100%;
 
   .wrapper {
@@ -35,18 +37,18 @@ const StyledRadioCar = styled.label`
 
 interface RadioCarProps {
   id: string;
-  name: string;
   index: number;
-  currentBet: string;
+  currentBet: null|string;
 }
 
 function RadioCar({
   id = "", // ex: "red"
-  name = "", // ex: "Red"
   index = 0, // ex: 0 for the 1st bet
   currentBet,
 }: RadioCarProps) {
   const dispatch = useDispatch();
+  const langCtx = useContext(LangContext);
+  const name = langCtx.get(`carRegular[${id}]`);
   const [checked, setChecked] = useState(currentBet === id);
   const theme = getCarTheme(id);
 
@@ -69,7 +71,7 @@ function RadioCar({
           onChange={handleToggleRadio}
         />
 
-        {name}
+        {name} 
       </div>
     </StyledRadioCar>
   );
