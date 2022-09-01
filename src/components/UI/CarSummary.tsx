@@ -1,5 +1,7 @@
 import { formatMoney, getCarTheme } from "../helpers";
 import styled from "styled-components";
+import { useContext } from "react";
+import LangContext from "../../store/i18n-context";
 
 const StyledCarSummary = styled.div`
   position: relative;
@@ -27,6 +29,11 @@ const StyledCarSummary = styled.div`
     padding: 0.5em 0;
   }
 
+  .pos {
+    display: inline-block;
+    margin-right: 0.5em;
+  }
+
   .price {
     display: block;
     width: 100%;
@@ -51,32 +58,38 @@ const StyledCarSummary = styled.div`
     }
   }
 
-  &.didnt-finished {
+  &.abandoned {
     text-decoration: line-through 0.25em red;
   }
 `;
 
-function CarSummary({
-  id = "",
-  name = "",
-  pos = 0,
-  finished = false,
-  money = 0,
-  active = false,
-}) {
-  const theme = getCarTheme(id);
-  const isActive = active ? "is-active" : "";
-  const showDidntFinished = pos > 0 && !finished;
-  const showPos = finished && pos;
+interface ICarSummary {
+  car: string,
+  status?: null|string,
+  pos?: null|number,
+  money?: number
+}
 
+function CarSummary({
+  pos,
+  car,
+  status,
+  money = 0,
+}: ICarSummary) {
+  const langCtx = useContext(LangContext);
+  const position = pos ? langCtx.get(`position${pos}`) : null;
+  const name = langCtx.get(`carRegular[${car}]`);
+  const theme = getCarTheme(car);
+  
   return (
     <StyledCarSummary
-      className={`${theme} ${isActive} ${
-        showDidntFinished ? "didnt-finished" : ""
-      }`}
+      className={`${theme} ${status !== null && status}`}
     >
       <div className="wrapper">
-        {name.trim().length && <div className="name">{showPos && <span className="pos">#{pos} </span>}{name}</div>}
+        {name && <div className="title">
+          {position && <span className="pos">{position}</span>}
+          <span className="name">{name}</span>
+        </div>}
         <div className="money">{formatMoney(money)}</div>
       </div>
     </StyledCarSummary>

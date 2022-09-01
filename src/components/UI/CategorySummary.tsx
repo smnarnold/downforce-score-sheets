@@ -1,5 +1,4 @@
-import { ReactElement, useState, useEffect, useMemo } from "react";
-import CarSummary from "./CarSummary";
+import { ReactElement } from "react";
 import MoneyTag from "./MoneyTag";
 import styled from "styled-components";
 
@@ -33,44 +32,25 @@ const StyledCategorySummary = styled.div`
 `;
 
 interface CategorySummaryProps {
-  title: string;
-  desc: string;
-  categoryArr: any[];
-  total: number;
+  title?: string;
+  label?: string;
+  details?: (null|ReactElement)[];
+  total?: number;
 }
 
 function CategorySummary({
-  title = "",
-  desc = "",
-  categoryArr = [],
+  title,
+  label,
+  details = [],
   total = 0,
 }: CategorySummaryProps) {
-  const [summaryArr, setSummaryArr] = useState<ReactElement[]>([]);
-
-  useMemo(() => {
-    const arr: ReactElement[] = categoryArr.map((car) => {
-      return (
-        <CarSummary
-          key={car.key}
-          id={car.id}
-          name={car.name}
-          pos={car.pos}
-          finished={car.finished}
-          money={car.amount}
-          active={car.active}
-        />
-      );
-    });
-
-    setSummaryArr(arr);
-  }, [categoryArr]);
 
   return (
     <StyledCategorySummary>
       <h3 className="title">{title}</h3>
-      <div className="table">{summaryArr}</div>
+      <div className="table">{details}</div>
       <div className="footer">
-        <span className="desc">{desc}</span>
+        <span className="label">{label}</span>
         <MoneyTag amount={total} />
       </div>
     </StyledCategorySummary>

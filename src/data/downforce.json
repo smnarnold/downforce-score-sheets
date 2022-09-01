@@ -31,7 +31,6 @@
       "name": "Yellow"
     }
   ],
-  "racingPrizes": [12, 9, 6, 4, 2, 0],
   "bettingPrizes": [
     [9,6,3],
     [6,4,2],
@@ -85,15 +84,7 @@
     {
       "id": "totals",
       "type": "totals",
-      "title": "Totals",
-      "racingTitle": "Racing payouts",
-      "racingDesc": "Racing total",
-      "bettingTitle": "Betting payouts",
-      "bettingDesc": "Betting total",
-      "auctionTitle": "Auction prices",
-      "auctionDesc": "Auction total",
-      "totalTitle": "Total winning",
-      "playAgain": "Play again"
+      "title": "Totals"
     }
   ]
 }

@@ -41,6 +41,7 @@
     "bettingPayouts": "Betting payouts",
     "racingTotal": "Racing total",
     "racingPayouts": "Racing payouts"
+    
   },
   "fr": {
     "carRegular": {
@@ -77,12 +78,12 @@
     "position5": "5e",
     "position6": "6e",
     "noCar": "Aucune voiture",
-    "totalWinning": "Gain totaux",
-    "auctionPrice": "Auction price",
-    "auctionTotal": "Auction total",
-    "bettingTotal": "Betting total",
-    "bettingPayouts": "Betting payouts",
-    "racingTotal": "Racing total",
-    "racingPayouts": "Racing payouts"
+    "totalWinning": "Gains totaux",
+    "auctionPrice": "Prix de l'enchère",
+    "auctionTotal": "Total de l'enchère",
+    "bettingTotal": "Total des mises",
+    "bettingPayouts": "Gains des mises",
+    "racingTotal": "Total de la course",
+    "racingPayouts": "Gains de course"
   }
 }

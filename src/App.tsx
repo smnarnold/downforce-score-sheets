@@ -1,4 +1,4 @@
-import { ReactElement, useState, useEffect, useContext, useMemo, } from "react";
+import { ReactElement, useState, useContext, useMemo, } from "react";
 import { useDispatch } from 'react-redux';
 import { goToSlide } from './components/UI/Wizard/wizardSlice';
 import data from "./data/downforce.json";
@@ -15,14 +15,9 @@ import Wizard from "./components/UI/Wizard/Wizard";
 import LangContext from "./store/i18n-context";
 
 function App() {
-  // console.log('Render APP')
   const langCtx = useContext(LangContext);
   const dispatch = useDispatch();
   const cars = ['black', 'blue', 'green', 'orange', 'red', 'yellow'];
-  const [auctionObj, setAuctionObj] = useState<any>(data.initial.auctionObj);
-  const [finishPosArr, setFinishPosArr] = useState<string[]>(
-    data.initial.finishPosArr
-  );
   const [slides, setSlides] = useState<(ReactElement|null)[]>([]);
   
   useMemo(() => {
@@ -68,11 +63,8 @@ function App() {
           case "totals":
             return (
               <SlideTotals
-                {...slide}
                 key={key}
-                cars={data.cars}
-                racingPrizes={data.racingPrizes}
-                bettingPrizes={data.bettingPrizes}
+                cars={cars}
                 restart={restart}
               />
             );
@@ -86,12 +78,6 @@ function App() {
 
   function restart() {
     dispatch(goToSlide(0));
-    setAuctionObj(data.initial.auctionObj);
-    setFinishPosArr(data.initial.finishPosArr);
-  }
-
-  function handleFinishPosChange(carsOrderArr: string[]) {
-    setFinishPosArr(carsOrderArr);
   }
 
   return (
