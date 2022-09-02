@@ -1,7 +1,7 @@
 export interface ISlideBetProps {
     betIndex: number;
     cars: any[];
-    bettingPrizes: any[];
+    bettingPrizes: number[];
 };
 
 export interface IBetItem {

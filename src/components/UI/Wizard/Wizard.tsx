@@ -8,7 +8,7 @@ interface StyledProps {
   wizardTranslateX: string;
 }
 
-const StyledWizard = styled.main<StyledProps>`
+const StyledWizard = styled.div<StyledProps>`
   flex: 1 1 auto;
   position: relative;
   display: grid;
@@ -18,23 +18,30 @@ const StyledWizard = styled.main<StyledProps>`
   width: ${(props) => props.wizardWidth};
   transform: translateX(${(props) => props.wizardTranslateX});
   transition: transform 0.3s;
+
+  &.slider-title {
+    height: 100%;
+  }
 `;
 
 interface WizardProps {
   slidesTotal: number;
   children: React.ReactNode;
+  className?: string;
 }
 
 export default function Wizard({
   slidesTotal = 0,
   children = null,
+  className = '',
 }: WizardProps) {
   const slideIndex = useSelector(wizardSlideIndex);
-  const wizardWidth : string = `${slidesTotal * 100}%`;
-  const wizardTranslateX : string = `${slideIndex / slidesTotal * -100}%`;
+  const wizardWidth:string = `${slidesTotal * 100}%`;
+  const wizardTranslateX:string = `${slideIndex / slidesTotal * -100}%`;
 
   return (
     <StyledWizard
+      className={className}
       slidesTotal={slidesTotal}
       wizardWidth={wizardWidth}
       wizardTranslateX={wizardTranslateX}

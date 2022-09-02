@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getCarTheme } from "../helpers";
 import styled from "styled-components";
@@ -30,7 +30,8 @@ const StyledSelectCar = styled.label`
   }
 
   .position {
-    flex: 0 0 auto;
+    flex: 0 0 45px;
+    width: 45px;
     display: flex;
     align-items: center;
   }
@@ -47,13 +48,13 @@ const StyledSelectCar = styled.label`
     font-weight: bold;
     text-align: center;
     border: 0;
-    padding-right: 10%;
+    padding-right: 40px;
   }
 `;
 
 interface SelectCarPositionProps {
   index: number;
-  cars: any[];
+  cars: string[];
 }
 
 function SelectCarPosition({
@@ -63,24 +64,14 @@ function SelectCarPosition({
   const dispatch = useDispatch();
   const langCtx = useContext(LangContext);
   const finishLine = useSelector(finishLineArr);
-
   const [carTheme, setCarTheme] = useState("");
 
   const carsNotRanked = useMemo(() => {
-    return cars.filter(car => !finishLine.includes(car.id) || car.id === carTheme);
+    return cars.filter(car => !finishLine.includes(car) || car === carTheme);
   }, [carTheme, cars, finishLine]);
 
   const theme = getCarTheme(carTheme);
-
-  const getCarOptions = (car: string) => {
-    return (
-      <option key={car} value={car}>
-        {langCtx.get(`carRegular[${car}]`)}
-      </option>
-    )
-  }
-
-  const optionsArr = carsNotRanked.map((car) => getCarOptions(car.id));
+  const optionsArr = carsNotRanked.map((car) => <option key={car} value={car}>{langCtx.get(`carRegular[${car}]`)}</option>);
 
   function handleChangeCar(id: string) {
     setCarTheme(id);

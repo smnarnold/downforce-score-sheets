@@ -18,10 +18,12 @@ function App() {
   const langCtx = useContext(LangContext);
   const dispatch = useDispatch();
   const cars = ['black', 'blue', 'green', 'orange', 'red', 'yellow'];
+  const bettingPrizes = [[9,6,3], [6,4,2], [3,2,1]];
+  let betIndex = -1;
   const [slides, setSlides] = useState<(ReactElement|null)[]>([]);
   
   useMemo(() => {
-    const slidesTmp: (ReactElement|null)[] = data.slides.map(
+    const slidesTmp: (ReactElement|null)[] = data.map(
       (slide: any, index: number) => {
         const key = `slide-${index}`;
         const slideInstructions = langCtx.get(`${slide.id}Instructions`) ? langCtx.get(`${slide.id}Instructions`) : '';
@@ -33,7 +35,7 @@ function App() {
               <SlideAuction
                 key={key}
                 instructions={slideInstructions}
-                cars={data.cars}
+                cars={cars}
               />
             );
           case "race":
@@ -45,19 +47,20 @@ function App() {
               />
             );
           case "bet":
+            betIndex++;
             return (
               <SlideBet
                 key={key}
-                cars={data.cars}
-                bettingPrizes={data.bettingPrizes}
-                betIndex={slide.betIndex}
+                cars={cars}
+                bettingPrizes={bettingPrizes[betIndex]}
+                betIndex={betIndex}
               />
             );
           case "finishline":
             return (
               <SlideFinishLine
                 key={key}
-                cars={data.cars}
+                cars={cars}
               />
             );
           case "totals":
@@ -65,6 +68,7 @@ function App() {
               <SlideTotals
                 key={key}
                 cars={cars}
+                bettingPrizes={bettingPrizes}
                 restart={restart}
               />
             );
@@ -84,9 +88,9 @@ function App() {
     <div className="App">
       <LangSelect />
 
-      <MainHeader slideTitle='allo'/>
+      <MainHeader data={data} />
 
-      <Wizard slidesTotal={data.slides.length}>
+      <Wizard slidesTotal={data.length}>
         {slides}
       </Wizard>
     </div>

@@ -9,7 +9,7 @@ import { useContext } from 'react';
 import LangContext from '../../../store/i18n-context';
 
 interface SlideFinishLineProps {
-  cars: any[];
+  cars: string[];
 }
 
 function SlideFinishLine({
@@ -26,7 +26,7 @@ function SlideFinishLine({
   const carsSelectArr = cars.map((car, index) => {
     return (
       <SelectCarPosition
-        key={car.id}
+        key={car}
         cars={cars}
         index={index}
       />

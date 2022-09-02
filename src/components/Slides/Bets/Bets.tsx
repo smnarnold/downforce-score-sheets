@@ -33,17 +33,16 @@ function SlideBet({
   const dispatch = useDispatch();
   const langCtx = useContext(LangContext);
   const bets = useSelector(betsArr);
-  const prizesArr = bettingPrizes[betIndex];
   const actualBet = bets[betIndex];
   const btnIsDisabled = actualBet === null;
 
   const handleCompleted = () => dispatch(nextSlide());
 
-  const carItems = cars.map((car) => {
+  const carItems = cars.map((car: string) => {
     return (
       <RadioCar
-        key={car.id}
-        id={car.id}
+        key={car}
+        id={car}
         index={betIndex}
         currentBet={actualBet}
       />
@@ -58,7 +57,7 @@ function SlideBet({
           <div className="betting-options">
             {carItems}
           </div>
-          <BettingPayouts arr={prizesArr} title={'test'} />
+          <BettingPayouts arr={bettingPrizes} title={langCtx.get("bettingPayouts")} />
         </StyledBets>
       }
       footer={

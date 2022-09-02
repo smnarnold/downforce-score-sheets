@@ -27,9 +27,7 @@ function SlideAuction({
 
   const handleCompleted = () => dispatch(nextSlide());
   
-  const carItems = cars.map((car: ICar) => {
-    return <RangeCarPrice {...car} key={car.id} id={car.id} />;
-  });
+  const carItems = cars.map((car: string) => <RangeCarPrice key={car} id={car} />);
 
   return (
     <Slide

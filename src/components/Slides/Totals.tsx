@@ -11,19 +11,16 @@ import LangContext from '../../store/i18n-context';
 import CarSummary from "../UI/CarSummary";
 interface SlideTotalsProps {
   cars: string[];
+  bettingPrizes: number[][];
   restart: () => void;
 }
 
 export default function SlideTotals({
   cars = [],
+  bettingPrizes = [],
   restart,
 }: SlideTotalsProps) {
   const racingPrizes = [12, 9, 6, 4, 2, 0];
-  const bettingPrizes = [
-    [9,6,3],
-    [6,4,2],
-    [3,2,1]
-  ];
 
   const langCtx = useContext(LangContext);
   const auction = useSelector(auctionObj);

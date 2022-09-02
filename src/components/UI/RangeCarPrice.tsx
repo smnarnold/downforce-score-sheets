@@ -55,7 +55,7 @@ export default function AuctionCar({
 }: AuctionCarProps) {
   const dispatch = useDispatch();
   const langCtx = useContext(LangContext);
-  const name = langCtx.get(`carMarioKart[${id}]`);
+  const name = langCtx.get(`carRegular[${id}]`);
   const [checked, setChecked] = useState(false);
   const [price, setPrice] = useState(initialValue);
   const theme = getCarTheme(id);

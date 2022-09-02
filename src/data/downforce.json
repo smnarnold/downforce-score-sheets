@@ -1,90 +1,38 @@
-{
-  "initial": {
-    "slideIndex": 0,
-    "auctionObj": {},
-    "betsArr": [],
-    "finishPosArr": []
+[
+  {
+    "id": "auction",
+    "type": "auction"
   },
-  "cars": [
-    {
-      "id": "black",
-      "name": "Black"
-    },
-    {
-      "id": "blue",
-      "name": "Blue"
-    },
-    {
-      "id": "green",
-      "name": "Green"
-    },
-    {
-      "id": "orange",
-      "name": "Orange"
-    },
-    {
-      "id": "red",
-      "name": "Red"
-    },
-    {
-      "id": "yellow",
-      "name": "Yellow"
-    }
-  ],
-  "bettingPrizes": [
-    [9,6,3],
-    [6,4,2],
-    [3,2,1]
-  ],
-  "slides": [
-    {
-      "id": "auction",
-      "type": "auction",
-      "title": "The auction"
-    },
-    {
-      "id": "race1",
-      "type": "race",
-      "title": "Race!"
-    },
-    {
-      "id": "bet1",
-      "type": "bet",
-      "betIndex": 0,
-      "title": "1st Betting round"
-    },
-    {
-      "id": "race2",
-      "type": "race",
-      "title": "Race!"
-    },
-    {
-      "id": "bet2",
-      "type": "bet",
-      "betIndex": 1,
-      "title": "2nd Betting round"
-    },
-    {
-      "id": "race3",
-      "type": "race",
-      "title": "Race!"
-    },
-    {
-      "id": "bet3",
-      "type": "bet",
-      "betIndex": 2,
-      "title": "3rd Betting round"
-    },
-    {
-      "id": "finishline",
-      "type": "finishline",
-      "title": "The finish line!",
-      "noCarSelected": "No Car"
-    },
-    {
-      "id": "totals",
-      "type": "totals",
-      "title": "Totals"
-    }
-  ]
-}
+  {
+    "id": "race1",
+    "type": "race"
+  },
+  {
+    "id": "bet1",
+    "type": "bet"
+  },
+  {
+    "id": "race2",
+    "type": "race"
+  },
+  {
+    "id": "bet2",
+    "type": "bet"
+  },
+  {
+    "id": "race3",
+    "type": "race"
+  },
+  {
+    "id": "bet3",
+    "type": "bet"
+  },
+  {
+    "id": "finishline",
+    "type": "finishline"
+  },
+  {
+    "id": "totals",
+    "type": "totals"
+  }
+]
