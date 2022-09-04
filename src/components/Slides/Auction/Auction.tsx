@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { auctionObj } from './auctionSlice';
-import { ICar } from '../../../Interfaces';
 import { nextSlide } from '../../UI/Wizard/wizardSlice';
 import Slide from "../../UI/Slide";
 import Instructions from "../../UI/Instructions";

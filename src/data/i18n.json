@@ -26,6 +26,7 @@
       "red": "Mario",
       "yellow": "Bowser"
     },
+    "language": "Language",
     "letsRace": "Let's race",
     "finishlineBtn": "Get Totals",
     "finishlineInstructions": "Select the finish order.",
@@ -78,6 +79,7 @@
       "red": "Mario",
       "yellow": "Bowser"
     },
+    "language": "Langage",
     "letsRace": "Faisons la course",
     "finishlineBtn": "Voir les totaux",
     "finishlineInstructions": "Sélectionnez l'ordre final.",

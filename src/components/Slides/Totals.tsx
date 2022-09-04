@@ -67,8 +67,11 @@ export default function SlideTotals({
 
   const auctionDetails = Object.entries(auction).map((item) => {
     const money = item[1] * -1;
-    const status = money < 0 ? 'is-active' : null;
-    return <CarSummary car={item[0]} money={money} status={status} />
+    if ( money < 0) {
+      return <CarSummary car={item[0]} money={money} status='is-active' />
+    } else {
+      return null;
+    }
   });
 
   return (

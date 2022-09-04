@@ -1,11 +1,13 @@
-import { useSelector } from 'react-redux';
-import { wizardSlideIndex } from './Wizard/wizardSlice';
-import BackBtn from "./BackBtn";
-import logo from "../../images/downforce-logo.webp";
-import styled from "styled-components";
-import Wizard from './Wizard/Wizard';
 import { useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import Wizard from './Wizard/Wizard';
+import { wizardSlideIndex, prevSlide } from './Wizard/wizardSlice';
+import logo from '../../images/downforce-logo.webp';
 import LangContext from '../../store/i18n-context';
+import { ReactComponent as SettingsIcon } from '../../images/settings-icon.svg';
+import { ReactComponent as BackIcon } from '../../images/back-icon.svg';
+import IconBtn from './IconBtn';
 
 const StyledMainHeader = styled.header`
   flex: 0 0 auto;
@@ -93,11 +95,14 @@ const StyledMainHeader = styled.header`
 
 interface MainHeaderProps {
   data: any[];
+  openSettings: () => void;
 }
 
 function MainHeader({
   data = [],
+  openSettings,
 }: MainHeaderProps) {
+  const dispatch = useDispatch();
   const langCtx = useContext(LangContext);
   const slideIndex = useSelector(wizardSlideIndex);
   const slides = data.map((slide) => <div className="slide-title">{langCtx.get(`${slide.id}Title`)}</div>)
@@ -110,7 +115,7 @@ function MainHeader({
 
       <nav>
         <div className="cell">
-          {slideIndex > 0 && <BackBtn />}
+          {slideIndex > 0 && <IconBtn Icon={BackIcon} callback={() => dispatch(prevSlide())} />}
         </div>
         
         <div className="title">
@@ -119,7 +124,9 @@ function MainHeader({
           </Wizard>
         </div>
 
-        <div className="cell"></div>
+        <div className="cell">
+          <IconBtn Icon={SettingsIcon} callback={openSettings} />
+        </div>
       </nav>
     </StyledMainHeader>
   );

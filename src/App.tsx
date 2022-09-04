@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { goToSlide } from './components/UI/Wizard/wizardSlice';
 import data from "./data/downforce.json";
 import "./App.scss";
+import styled from "styled-components";
 
 import SlideAuction from "./components/Slides/Auction/Auction";
 import SlideRace from "./components/Slides/Race";
@@ -10,9 +11,13 @@ import SlideBet from "./components/Slides/Bets/Bets";
 import SlideFinishLine from "./components/Slides/FinishLine/FinishLine";
 import SlideTotals from "./components/Slides/Totals";
 import MainHeader from "./components/UI/MainHeader";
-import LangSelect from "./components/UI/LangSelect";
 import Wizard from "./components/UI/Wizard/Wizard";
 import LangContext from "./store/i18n-context";
+import SettingsPanel from "./components/UI/SettingsPanel";
+
+const StyledMainContent = styled.div`
+  position: relative;
+`
 
 function App() {
   const langCtx = useContext(LangContext);
@@ -21,6 +26,7 @@ function App() {
   const bettingPrizes = [[9,6,3], [6,4,2], [3,2,1]];
   let betIndex = -1;
   const [slides, setSlides] = useState<(ReactElement|null)[]>([]);
+  const [settingsVisible, setSettingsVisible] = useState<boolean>(false);
   
   useMemo(() => {
     const slidesTmp: (ReactElement|null)[] = data.map(
@@ -86,13 +92,19 @@ function App() {
 
   return (
     <div className="App">
-      <LangSelect />
+      <MainHeader 
+        data={data} 
+        openSettings={() => setSettingsVisible(true)} />
 
-      <MainHeader data={data} />
+      <StyledMainContent>
+        <Wizard slidesTotal={data.length}>
+          {slides}
+        </Wizard>
 
-      <Wizard slidesTotal={data.length}>
-        {slides}
-      </Wizard>
+        <SettingsPanel 
+          visible={settingsVisible} 
+          close={() => setSettingsVisible(false)} />
+      </StyledMainContent>
     </div>
   );
 }
