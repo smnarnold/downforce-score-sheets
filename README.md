@@ -11,8 +11,16 @@ https://user-images.githubusercontent.com/1105060/188499331-e0311f6e-2a86-4df0-9
 - Espagnol
 - Deutch
 
-## Why a website?
-There is already an official app available for Downforce, but asking someone who never played the game before to install an app is usually a turn off. To overcome this problem, I created a simple website. Moreover, I took the opportunity to adjust some slight irritants. In particular the fact that the app contains three games, not just Downforce. Some components are now more intuitive and easier to use.
+## Acknowledgement
+There is already an official [Apple](https://apps.apple.com/us/app/restoration-games/id1229496560) and [Android](https://play.google.com/store/apps/details?id=com.restorationgames.restoration) app available for Downforce. Which this wesite was inspired of.
+
+## App differences
+- No download necessary
+- Downforce only *(no 3 in 1 games)*
+- More intuitive controls
+- Mario Kart theme available *(for those with the Mario Kart cars)*
+- French translation improvement
+- Spanish translation available
 
 ## How to Install
 ```
