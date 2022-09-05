@@ -101,7 +101,7 @@ export default function SlideTotals({
         <>
           <h3>{appCtx.getTranslation('totalWinning')}</h3>
           <MoneyTag amount={racingTotal + bettingTotal + auctionTotal} />
-          <Btn text="Restart" callback={restart} />
+          <Btn text={appCtx.getTranslation('restart')} callback={restart} />
         </>
       }
     />
