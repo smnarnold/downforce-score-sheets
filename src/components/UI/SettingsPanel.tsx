@@ -48,7 +48,6 @@ function SettingsPanel({
     close
 } : IStyledSettingsPanel) {
     const appCtx = useContext(AppContext);
-    console.log(appCtx.theme)
     
     return (
         <StyledSettingsPanel className={visible ? 'is-visible' : ''}>

@@ -23,7 +23,7 @@ const AppContext = createContext({
 } as AppContextProps);
 
 export const AppContextProvider = (props: any) => {
-  const [theme, setTheme] = useState<string>("classic");
+  const [theme, setTheme] = useState<string>("Classic");
   const [lang, setLang] = useState<string>("en");
   const [dictionary, setDictionary] = useState<object>(i18n["en"]);
 
