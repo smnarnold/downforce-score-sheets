@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { getCarTheme } from "../helpers";
 import styled from "styled-components";
 import { updateBets } from "../Slides/Bets/betsSlice";
-import LangContext from "../../store/i18n-context";
+import AppContext from "../../store/app-context";
 
 const StyledRadioCar = styled.label`
   flex: 1 1 auto;
@@ -47,8 +47,8 @@ function RadioCar({
   currentBet,
 }: RadioCarProps) {
   const dispatch = useDispatch();
-  const langCtx = useContext(LangContext);
-  const name = langCtx.get(`carRegular[${id}]`);
+  const appCtx = useContext(AppContext);
+  const name = appCtx.getTranslation(`car${appCtx.theme}[${id}]`);
   const [checked, setChecked] = useState(currentBet === id);
   const theme = getCarTheme(id);
 

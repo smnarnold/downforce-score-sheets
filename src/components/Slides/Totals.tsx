@@ -7,7 +7,7 @@ import { auctionObj } from './Auction/auctionSlice';
 import { betsArr } from './Bets/betsSlice';
 import { finishLineArr } from "./FinishLine/finishLineSlice";
 import { useSelector } from "react-redux";
-import LangContext from '../../store/i18n-context';
+import AppContext from '../../store/app-context';
 import CarSummary from "../UI/CarSummary";
 interface SlideTotalsProps {
   cars: string[];
@@ -22,7 +22,7 @@ export default function SlideTotals({
 }: SlideTotalsProps) {
   const racingPrizes = [12, 9, 6, 4, 2, 0];
 
-  const langCtx = useContext(LangContext);
+  const appCtx = useContext(AppContext);
   const auction = useSelector(auctionObj);
   const bets = useSelector(betsArr);
   const finishLine = useSelector(finishLineArr);
@@ -79,27 +79,27 @@ export default function SlideTotals({
       body={
         <>
           <CategorySummary
-            title={langCtx.get('racingPayouts')}
-            label={langCtx.get('racingTotal')}
+            title={appCtx.getTranslation('racingPayouts')}
+            label={appCtx.getTranslation('racingTotal')}
             details={racingDetails}
             total={racingTotal} />
           
           <CategorySummary
-            title={langCtx.get('bettingPayouts')}
-            label={langCtx.get('bettingTotal')}
+            title={appCtx.getTranslation('bettingPayouts')}
+            label={appCtx.getTranslation('bettingTotal')}
             details={bettingDetails}
             total={bettingTotal} />
 
           <CategorySummary
-            title={langCtx.get('auctionPrice')}
-            label={langCtx.get('auctionTotal')}
+            title={appCtx.getTranslation('auctionPrice')}
+            label={appCtx.getTranslation('auctionTotal')}
             details={auctionDetails}
             total={auctionTotal} />
         </>
       }
       footer={
         <>
-          <h3>{langCtx.get('totalWinning')}</h3>
+          <h3>{appCtx.getTranslation('totalWinning')}</h3>
           <MoneyTag amount={racingTotal + bettingTotal + auctionTotal} />
           <Btn text="Restart" callback={restart} />
         </>

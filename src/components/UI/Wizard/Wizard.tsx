@@ -16,6 +16,7 @@ const StyledWizard = styled.div<StyledProps>`
   grid-auto-rows: 1fr;
   left: 0;
   width: ${(props) => props.wizardWidth};
+  height: 100%;
   transform: translateX(${(props) => props.wizardTranslateX});
   transition: transform 0.3s;
 

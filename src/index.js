@@ -3,17 +3,17 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import App from "./App";
 import store from "./store";
-import { LangContextProvider } from "./store/i18n-context";
+import { AppContextProvider } from "./store/app-context";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <LangContextProvider>
+    <AppContextProvider>
       <Provider store={store}>
         <App />
       </Provider>
-    </LangContextProvider>
+    </AppContextProvider>
   </React.StrictMode>
 );
 

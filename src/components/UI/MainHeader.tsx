@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Wizard from './Wizard/Wizard';
 import { wizardSlideIndex, prevSlide } from './Wizard/wizardSlice';
 import logo from '../../images/downforce-logo.webp';
-import LangContext from '../../store/i18n-context';
+import AppContext from '../../store/app-context';
 import { ReactComponent as SettingsIcon } from '../../images/settings-icon.svg';
 import { ReactComponent as BackIcon } from '../../images/back-icon.svg';
 import IconBtn from './IconBtn';
@@ -103,9 +103,9 @@ function MainHeader({
   openSettings,
 }: MainHeaderProps) {
   const dispatch = useDispatch();
-  const langCtx = useContext(LangContext);
+  const appCtx = useContext(AppContext);
   const slideIndex = useSelector(wizardSlideIndex);
-  const slides = data.map((slide) => <div className="slide-title">{langCtx.get(`${slide.id}Title`)}</div>)
+  const slides = data.map((slide) => <div className="slide-title">{appCtx.getTranslation(`${slide.id}Title`)}</div>)
 
   return (
     <StyledMainHeader>

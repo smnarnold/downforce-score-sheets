@@ -10,7 +10,7 @@
     "betInstructions": "Which car will win the race?",
     "bettingPayouts": "Betting payouts",
     "bettingTotal": "Betting total",
-    "carRegular": {
+    "carClassic": {
       "black": "Black",
       "blue": "Blue",
       "green": "Green",
@@ -49,6 +49,8 @@
     "race3Title": "Race!",
     "racingPayouts": "Racing payouts",
     "racingTotal": "Racing total",
+    "themeClassic": "Classic theme",
+    "themeMarioKart": "Mario Kart theme",
     "totalsTitle": "Totaux",
     "totalWinning": "Total winning"
   },
@@ -63,7 +65,7 @@
     "betInstructions": "Quelle voiture gagnera la course?",
     "bettingPayouts": "Gains des mises",
     "bettingTotal": "Total des mises",
-    "carRegular": {
+    "carClassic": {
       "black": "Noire",
       "blue": "Bleue",
       "green": "Verte",
@@ -102,6 +104,8 @@
     "race3Title": "C'est parti!",
     "racingPayouts": "Gains de course",
     "racingTotal": "Total de la course",
+    "themeClassic": "Thème classique",
+    "themeMarioKart": "Thème Mario Kart",
     "totalsTitle": "Totals",
     "totalWinning": "Gains totaux"
   }

@@ -9,7 +9,7 @@ import BettingPayouts from "../../UI/BettingPayouts";
 import Btn from "../../UI/Btn";
 import { betsArr } from './betsSlice';
 import { useContext } from 'react';
-import LangContext from '../../../store/i18n-context';
+import AppContext from '../../../store/app-context';
 
 const StyledBets = styled.figure`
   flex: 1 1 auto;
@@ -31,7 +31,7 @@ function SlideBet({
   bettingPrizes = [],
 }: ISlideBetProps) {
   const dispatch = useDispatch();
-  const langCtx = useContext(LangContext);
+  const appCtx = useContext(AppContext);
   const bets = useSelector(betsArr);
   const actualBet = bets[betIndex];
   const btnIsDisabled = actualBet === null;
@@ -51,18 +51,18 @@ function SlideBet({
 
   return (
     <Slide
-      header={<Instructions text={langCtx.get("betInstructions")} />}
+      header={<Instructions text={appCtx.getTranslation("betInstructions")} />}
       body={
         <StyledBets>
           <div className="betting-options">
             {carItems}
           </div>
-          <BettingPayouts arr={bettingPrizes} title={langCtx.get("bettingPayouts")} />
+          <BettingPayouts arr={bettingPrizes} title={appCtx.getTranslation("bettingPayouts")} />
         </StyledBets>
       }
       footer={
         <Btn
-          text={langCtx.get("letsRace")}
+          text={appCtx.getTranslation("letsRace")}
           callback={handleCompleted}
           disabled={btnIsDisabled}
         />

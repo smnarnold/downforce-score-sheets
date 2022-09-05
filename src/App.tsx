@@ -12,15 +12,16 @@ import SlideFinishLine from "./components/Slides/FinishLine/FinishLine";
 import SlideTotals from "./components/Slides/Totals";
 import MainHeader from "./components/UI/MainHeader";
 import Wizard from "./components/UI/Wizard/Wizard";
-import LangContext from "./store/i18n-context";
+import AppContext from "./store/app-context";
 import SettingsPanel from "./components/UI/SettingsPanel";
 
 const StyledMainContent = styled.div`
+  flex: 1 1 auto;
   position: relative;
 `
 
 function App() {
-  const langCtx = useContext(LangContext);
+  const appCtx = useContext(AppContext);
   const dispatch = useDispatch();
   const cars = ['black', 'blue', 'green', 'orange', 'red', 'yellow'];
   const bettingPrizes = [[9,6,3], [6,4,2], [3,2,1]];
@@ -32,8 +33,8 @@ function App() {
     const slidesTmp: (ReactElement|null)[] = data.map(
       (slide: any, index: number) => {
         const key = `slide-${index}`;
-        const slideInstructions = langCtx.get(`${slide.id}Instructions`) ? langCtx.get(`${slide.id}Instructions`) : '';
-        let slideBtn = langCtx.get(`${slide.id}Btn`) ? langCtx.get(`${slide.id}Btn`) : '';
+        const slideInstructions = appCtx.getTranslation(`${slide.id}Instructions`) ? appCtx.getTranslation(`${slide.id}Instructions`) : '';
+        let slideBtn = appCtx.getTranslation(`${slide.id}Btn`) ? appCtx.getTranslation(`${slide.id}Btn`) : '';
 
         switch (slide.type) {
           case "auction":
@@ -84,7 +85,7 @@ function App() {
       }
     );
     setSlides(slidesTmp);
-  }, [langCtx]);
+  }, [appCtx]);
 
   function restart() {
     dispatch(goToSlide(0));

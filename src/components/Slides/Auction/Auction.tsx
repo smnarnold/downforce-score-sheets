@@ -6,7 +6,7 @@ import Instructions from "../../UI/Instructions";
 import RangeCarPrice from "../../UI/RangeCarPrice";
 import Btn from "../../UI/Btn";
 import { useContext } from 'react';
-import LangContext from '../../../store/i18n-context';
+import AppContext from '../../../store/app-context';
 
 interface SlideAuctionProps {
   instructions?: string;
@@ -18,7 +18,7 @@ function SlideAuction({
   cars = [],
 }: SlideAuctionProps) {
   const dispatch = useDispatch();
-  const langCtx = useContext(LangContext);
+  const appCtx = useContext(AppContext);
   const auction = useSelector(auctionObj);
   const auctionArr = Object.values(auction)
   const auctionTotal = auctionArr.length ? auctionArr.reduce((a, b) => a + b) : 0;
@@ -34,7 +34,7 @@ function SlideAuction({
       body={carItems}
       footer={
         <Btn
-          text={langCtx.get("letsRace")}
+          text={appCtx.getTranslation("letsRace")}
           disabled={btnIsDisabled}
           callback={handleCompleted}
         />

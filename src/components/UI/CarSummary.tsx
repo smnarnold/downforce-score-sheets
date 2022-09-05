@@ -1,7 +1,7 @@
 import { formatMoney, getCarTheme } from "../helpers";
 import styled from "styled-components";
 import { useContext } from "react";
-import LangContext from "../../store/i18n-context";
+import AppContext from "../../store/app-context";
 
 const StyledCarSummary = styled.div`
   position: relative;
@@ -76,9 +76,9 @@ function CarSummary({
   status,
   money = 0,
 }: ICarSummary) {
-  const langCtx = useContext(LangContext);
-  const position = pos ? langCtx.get(`position${pos}`) : null;
-  const name = langCtx.get(`carRegular[${car}]`);
+  const appCtx = useContext(AppContext);
+  const position = pos ? appCtx.getTranslation(`position${pos}`) : null;
+  const name = appCtx.getTranslation(`car${appCtx.theme}[${car}]`);
   const theme = getCarTheme(car);
   
   return (

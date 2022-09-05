@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import LangContext from "../../store/i18n-context";
+import AppContext from "../../store/app-context";
 
 const StyledLangSelect = styled.label`
   color: currentColor;
@@ -20,14 +20,14 @@ const StyledLangSelect = styled.label`
 `;
 
 function LangSelect() {
-  const langCtx = useContext(LangContext);
+  const appCtx = useContext(AppContext);
 
   return (
     <StyledLangSelect>
-      {langCtx.get('language')}
+      {appCtx.getTranslation('language')}
       <select
-        value={langCtx.lang}
-        onChange={(e) => langCtx.onToggleLang(e.target.value)}
+        value={appCtx.lang}
+        onChange={(e) => appCtx.onToggleLang(e.target.value)}
       >
         <option value={"en"}>English</option>
         <option value={"fr"}>Français</option>

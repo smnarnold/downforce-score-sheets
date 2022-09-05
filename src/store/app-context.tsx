@@ -1,29 +1,38 @@
 import { useState, useEffect, createContext } from "react";
 import i18n from "../data/i18n.json";
 import _get from 'lodash/get';
-interface LangContextProps {
+
+interface AppContextProps {
+  theme: string;
+  onToggleTheme: (key: string) => void;
   lang: string;
   i18n: any;
   dictionary: any;
-  get: (key: string) => string;
+  getTranslation: (key: string) => string;
   onToggleLang: (key: string) => void;
 }
 
-const LangContext = createContext({
+const AppContext = createContext({
+  theme: 'Regular',
+  onToggleTheme: (theme: string) => {},
   lang: "en",
   i18n: i18n,
   dictionary: {},
-  get: (key: string) => {},
+  getTranslation: (key: string) => {},
   onToggleLang: (language: string) => {},
-} as LangContextProps);
+} as AppContextProps);
 
-export const LangContextProvider = (props: any) => {
+export const AppContextProvider = (props: any) => {
+  const [theme, setTheme] = useState<string>("classic");
   const [lang, setLang] = useState<string>("en");
   const [dictionary, setDictionary] = useState<object>(i18n["en"]);
 
   useEffect(() => {
     const storedLang: string | null = localStorage.getItem("lang");
-    if (storedLang && storedLang !== "en") updateLang(storedLang); // Not default language
+    const storedTheme: string | null = localStorage.getItem("theme");
+
+    if (storedLang && storedLang !== lang) updateLang(storedLang); // Not default language
+    if (storedTheme && storedTheme !== theme) updateTheme(storedTheme); // Not default language
   }, []);
 
   const updateLang = (language: string) => {
@@ -39,22 +48,32 @@ export const LangContextProvider = (props: any) => {
 
   const getTranslationHandler = (key: string): string => {
     return _get(dictionary, key);
-    //return dictionary[key as keyof typeof dictionary];
+  };
+
+  const toggleThemeHandler = (theme: string) => {
+    updateTheme(theme);
+    localStorage.setItem("theme", theme);
+  };
+
+  const updateTheme = (theme: string) => {
+    setTheme(theme);
   };
 
   return (
-    <LangContext.Provider
+    <AppContext.Provider
       value={{
+        theme: theme,
+        onToggleTheme: toggleThemeHandler,
         lang: lang,
         i18n: i18n,
         dictionary: dictionary,
-        get: getTranslationHandler,
+        getTranslation: getTranslationHandler,
         onToggleLang: toggleLangHandler,
       }}
     >
       {props.children}
-    </LangContext.Provider>
+    </AppContext.Provider>
   );
 };
 
-export default LangContext;
+export default AppContext;

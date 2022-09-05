@@ -4,7 +4,7 @@ import { getCarTheme } from "../helpers";
 import Gauge from "./Gauge";
 import styled from "styled-components";
 import { updateAuction } from "../Slides/Auction/auctionSlice";
-import LangContext from "../../store/i18n-context";
+import AppContext from "../../store/app-context";
 
 const StyledAuctionCar = styled.div`
   flex: 1 1 auto;  
@@ -54,8 +54,8 @@ export default function AuctionCar({
   initialValue = 0,
 }: AuctionCarProps) {
   const dispatch = useDispatch();
-  const langCtx = useContext(LangContext);
-  const name = langCtx.get(`carRegular[${id}]`);
+  const appCtx = useContext(AppContext);
+  const name = appCtx.getTranslation(`car${appCtx.theme}[${id}]`);
   const [checked, setChecked] = useState(false);
   const [price, setPrice] = useState(initialValue);
   const theme = getCarTheme(id);

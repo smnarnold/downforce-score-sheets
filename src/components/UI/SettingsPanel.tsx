@@ -1,7 +1,12 @@
 import styled from "styled-components";
-import LangSelect from "./LangSelect";
 import IconBtn from "./IconBtn";
 import { ReactComponent as CloseIcon } from '../../images/close-icon.svg';
+import RadioImage from "./RadioImage";
+import themeClassic from '../../images/theme-classic.webp';
+import themeMarioKart from '../../images/theme-mario-kart.webp';
+import { useContext } from "react";
+import AppContext from "../../store/app-context";
+import SelectLang from "./SelectLang";
 
 interface IStyledSettingsPanel {
     visible: boolean;
@@ -42,13 +47,37 @@ function SettingsPanel({
     visible = false,
     close
 } : IStyledSettingsPanel) {
+    const appCtx = useContext(AppContext);
+    console.log(appCtx.theme)
+    
     return (
         <StyledSettingsPanel className={visible ? 'is-visible' : ''}>
             <div className="bar">
                 <IconBtn Icon={CloseIcon} callback={close} />
             </div>
             
-            <LangSelect />
+            <SelectLang />
+
+            <RadioImage 
+                id="Classic" 
+                img={themeClassic} 
+                width="800" 
+                height="250" 
+                label={appCtx.getTranslation('themeClassic')}
+                name="theme" 
+                checked={appCtx.theme === 'Classic'}
+                value="Classic"
+                callback={(e: { target: { value: string; }; }) => appCtx.onToggleTheme(e.target.value)} />
+            <RadioImage 
+                id="MarioKart" 
+                img={themeMarioKart} 
+                width="800" 
+                height="250" 
+                label={appCtx.getTranslation('themeMarioKart')}
+                name="theme" 
+                checked={appCtx.theme === 'MarioKart'}
+                value="MarioKart"
+                callback={(e: { target: { value: string; }; }) => appCtx.onToggleTheme(e.target.value)} />
         </StyledSettingsPanel>)
 }
 

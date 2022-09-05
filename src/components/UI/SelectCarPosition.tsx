@@ -2,7 +2,7 @@ import { useContext, useMemo, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getCarTheme } from "../helpers";
 import styled from "styled-components";
-import LangContext from '../../store/i18n-context';
+import AppContext from '../../store/app-context';
 import { finishLineArr, updateFinishLine } from "../Slides/FinishLine/finishLineSlice";
 
 const StyledSelectCar = styled.label`
@@ -62,7 +62,7 @@ function SelectCarPosition({
   cars = [],
 }: SelectCarPositionProps) {
   const dispatch = useDispatch();
-  const langCtx = useContext(LangContext);
+  const appCtx = useContext(AppContext);
   const finishLine = useSelector(finishLineArr);
   const [carTheme, setCarTheme] = useState("");
 
@@ -71,7 +71,7 @@ function SelectCarPosition({
   }, [carTheme, cars, finishLine]);
 
   const theme = getCarTheme(carTheme);
-  const optionsArr = carsNotRanked.map((car) => <option key={car} value={car}>{langCtx.get(`carRegular[${car}]`)}</option>);
+  const optionsArr = carsNotRanked.map((car) => <option key={car} value={car}>{appCtx.getTranslation(`car${appCtx.theme}[${car}]`)}</option>);
 
   function handleChangeCar(id: string) {
     setCarTheme(id);
@@ -81,10 +81,10 @@ function SelectCarPosition({
   return (
     <StyledSelectCar className={`${theme} is-active`}>
       <div className="wrapper">
-        <span className="position">{langCtx.get(`position${index + 1}`)}</span>
+        <span className="position">{appCtx.getTranslation(`position${index + 1}`)}</span>
         <select onChange={(event) => handleChangeCar(event.target.value)}>
           <option key="default" value="">
-            {langCtx.get('noCar')}
+            {appCtx.getTranslation('noCar')}
           </option>
           {optionsArr}
         </select>
