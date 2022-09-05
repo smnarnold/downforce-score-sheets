@@ -14,6 +14,9 @@ import MainHeader from "./components/UI/MainHeader";
 import Wizard from "./components/UI/Wizard/Wizard";
 import AppContext from "./store/app-context";
 import SettingsPanel from "./components/UI/SettingsPanel";
+import { resetAuction } from "./components/Slides/Auction/auctionSlice";
+import { resetBets } from "./components/Slides/Bets/betsSlice";
+import { resetFinishLine } from "./components/Slides/FinishLine/finishLineSlice";
 
 const StyledMainContent = styled.div`
   flex: 1 1 auto;
@@ -88,6 +91,9 @@ function App() {
   }, [appCtx]);
 
   function restart() {
+    dispatch(resetAuction());
+    dispatch(resetBets());
+    dispatch(resetFinishLine());
     dispatch(goToSlide(0));
   }
 

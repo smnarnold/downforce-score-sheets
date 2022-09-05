@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import IconBtn from "./IconBtn";
-import { ReactComponent as CloseIcon } from '../../images/close-icon.svg';
+import { ReactComponent as CloseIcon } from '../../images/icons/close.svg';
 import RadioImage from "./RadioImage";
 import themeClassic from '../../images/theme-classic.webp';
 import themeMarioKart from '../../images/theme-mario-kart.webp';

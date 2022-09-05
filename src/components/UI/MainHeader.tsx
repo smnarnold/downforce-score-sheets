@@ -5,8 +5,8 @@ import Wizard from './Wizard/Wizard';
 import { wizardSlideIndex, prevSlide } from './Wizard/wizardSlice';
 import logo from '../../images/downforce-logo.webp';
 import AppContext from '../../store/app-context';
-import { ReactComponent as SettingsIcon } from '../../images/settings-icon.svg';
-import { ReactComponent as BackIcon } from '../../images/back-icon.svg';
+import { ReactComponent as SettingsIcon } from '../../images/icons/settings.svg';
+import { ReactComponent as BackIcon } from '../../images/icons/back.svg';
 import IconBtn from './IconBtn';
 
 const StyledMainHeader = styled.header`

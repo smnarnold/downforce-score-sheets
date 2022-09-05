@@ -29,8 +29,10 @@ function LangSelect() {
         value={appCtx.lang}
         onChange={(e) => appCtx.onToggleLang(e.target.value)}
       >
-        <option value={"en"}>English</option>
-        <option value={"fr"}>Français</option>
+        <option value={"en"}>English 🇬🇧</option>
+        <option value={"fr"}>Français 🇫🇷</option>
+        <option value={"es"}>Espagnol 🇪🇸</option>
+        <option value={"de"}>Deutch 🇩🇪</option>
       </select>
     </StyledLangSelect>
   );
