@@ -27,6 +27,7 @@ export const AppContextProvider = (props: any) => {
   const [lang, setLang] = useState<string>("en");
   const [dictionary, setDictionary] = useState<object>(i18n["en"]);
 
+  // Initial page load only
   useEffect(() => {
     const storedLang: string | null = localStorage.getItem("lang");
     const storedTheme: string | null = localStorage.getItem("theme");
@@ -34,6 +35,13 @@ export const AppContextProvider = (props: any) => {
     if (storedLang && storedLang !== lang) updateLang(storedLang); // Not default language
     if (storedTheme && storedTheme !== theme) updateTheme(storedTheme); // Not default language
   }, []);
+
+  useEffect(() => {
+    document.title = getTranslationHandler('metaTitle');
+    document.head.querySelector('meta[property="og:title"]')?.setAttribute('content', getTranslationHandler('metaTitle'));
+    document.head.querySelector('meta[property="og:description"]')?.setAttribute('content', getTranslationHandler('metaDescription'));
+    document.head.querySelector('meta[name="description"]')?.setAttribute('content', getTranslationHandler('metaDescription'));
+  }, [lang]);
 
   const updateLang = (language: string) => {
     setLang(language);
@@ -44,6 +52,7 @@ export const AppContextProvider = (props: any) => {
   const toggleLangHandler = (language: string) => {
     updateLang(language);
     localStorage.setItem("lang", language);
+    
   };
 
   const getTranslationHandler = (key: string): string => {
