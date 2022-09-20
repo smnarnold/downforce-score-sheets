@@ -2,6 +2,13 @@ import { useState, useEffect, createContext } from "react";
 import i18n from "../data/i18n.json";
 import _get from 'lodash/get';
 
+enum SupportedLanguages {
+  en = "en",
+  fr = "fr",
+  es = "es",
+  de = "de",
+};
+
 interface AppContextProps {
   theme: string;
   onToggleTheme: (key: string) => void;
@@ -18,14 +25,21 @@ const AppContext = createContext({
   lang: "en",
   i18n: i18n,
   dictionary: {},
-  getTranslation: (key: string) => {},
-  onToggleLang: (language: string) => {},
+  getTranslation: (key: SupportedLanguages) => {},
+  onToggleLang: (language: SupportedLanguages) => {},
 } as AppContextProps);
+
+export const getBrowserLang = () => {
+  const lang = (navigator.languages && navigator.languages[0]) || navigator.language;
+  return lang.substring(0, 2).toLowerCase() ?? "en";
+}
 
 export const AppContextProvider = (props: any) => {
   const [theme, setTheme] = useState<string>("Classic");
-  const [lang, setLang] = useState<string>("en");
-  const [dictionary, setDictionary] = useState<object>(i18n["en"]);
+  const browserLang = getBrowserLang();
+  const defaultLang = browserLang in SupportedLanguages ? browserLang : "en";
+  const [lang, setLang] = useState<string>(defaultLang);
+  const [dictionary, setDictionary] = useState<object>(i18n[defaultLang as keyof typeof i18n]);
 
   // Initial page load only
   useEffect(() => {
