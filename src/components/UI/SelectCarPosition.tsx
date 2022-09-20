@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getCarTheme } from "../helpers";
 import styled from "styled-components";
@@ -64,11 +64,17 @@ function SelectCarPosition({
   const dispatch = useDispatch();
   const appCtx = useContext(AppContext);
   const finishLine = useSelector(finishLineArr);
-  const [carTheme, setCarTheme] = useState("");
+  const value = finishLine[index] ?? ""; // if null or undefined, use empty string
+  const [carTheme, setCarTheme] = useState(value);
 
   const carsNotRanked = useMemo(() => {
     return cars.filter(car => !finishLine.includes(car) || car === carTheme);
   }, [carTheme, cars, finishLine]);
+
+  useEffect(() => {
+    const value = finishLine[index] ?? "";
+    setCarTheme(value);
+  }, [index, finishLine]);
 
   const theme = getCarTheme(carTheme);
   const optionsArr = carsNotRanked.map((car) => <option key={car} value={car}>{appCtx.getTranslation(`car${appCtx.theme}[${car}]`)}</option>);
@@ -82,7 +88,7 @@ function SelectCarPosition({
     <StyledSelectCar className={`${theme} is-active`}>
       <div className="wrapper">
         <span className="position">{appCtx.getTranslation(`position${index + 1}`)}</span>
-        <select onChange={(event) => handleChangeCar(event.target.value)}>
+        <select value={carTheme} onChange={(event) => handleChangeCar(event.target.value)}>
           <option key="default" value="">
             {appCtx.getTranslation('noCar')}
           </option>

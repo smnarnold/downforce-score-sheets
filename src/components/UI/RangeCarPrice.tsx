@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCarTheme } from "../helpers";
 import Gauge from "./Gauge";
 import styled from "styled-components";
-import { updateAuction } from "../Slides/Auction/auctionSlice";
+import { auctionObj, updateAuction } from "../Slides/Auction/auctionSlice";
 import AppContext from "../../store/app-context";
 
 const StyledAuctionCar = styled.div`
@@ -46,19 +46,22 @@ const StyledAuctionCar = styled.div`
 
 interface AuctionCarProps {
   id: string;
-  initialValue?: number;
 }
 
 export default function AuctionCar({
   id = "",
-  initialValue = 0,
 }: AuctionCarProps) {
+  
   const dispatch = useDispatch();
   const appCtx = useContext(AppContext);
+  const auction = useSelector(auctionObj);
   const name = appCtx.getTranslation(`car${appCtx.theme}[${id}]`);
-  const [checked, setChecked] = useState(false);
-  const [price, setPrice] = useState(initialValue);
+  const [price, setPrice] = useState(auction[id]);
   const theme = getCarTheme(id);
+
+  useEffect(() => {
+    setPrice(auction[id]);
+  }, [auction, id]);
 
   useEffect(() => {
     /* Wait that the user stop changing the price before calling onBidChange */
@@ -73,19 +76,19 @@ export default function AuctionCar({
     setPrice(val);
   }
 
-  function toggleCar() {
-    setPrice(checked ? 0 : 1);
-    setChecked(!checked);
+  function toggleCar(e:React.ChangeEvent<HTMLInputElement>) {
+    const val = e.target.checked ? 1 : 0;
+    handlePriceChange(val);
   }
 
   return (
     <StyledAuctionCar
       key={name}
-      className={`${checked && "is-active"} ${theme}`}
+      className={`${price > 0 && "is-active"} ${theme}`}
     >
       <div className="wrapper">
         <label className="label">
-          <input type="checkbox" onChange={toggleCar} className="radio" />
+          <input type="checkbox" onChange={(e) => toggleCar(e)} className="radio" checked={price > 0} />
           <div className="name">{name}</div>
         </label>
 
@@ -94,7 +97,7 @@ export default function AuctionCar({
           min={1}
           max={6}
           step={1}
-          disabled={!checked}
+          disabled={price === 0}
           callback={handlePriceChange}
         />
       </div>

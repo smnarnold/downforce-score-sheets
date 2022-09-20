@@ -69,6 +69,7 @@ function RadioCar({
           name={`bet-${index}`}
           value={id}
           onChange={handleToggleRadio}
+          checked={checked}
         />
 
         {name} 
